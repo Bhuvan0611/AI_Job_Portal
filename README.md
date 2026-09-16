@@ -49,47 +49,155 @@ A full-stack job portal where **job seekers** can browse and apply for jobs, and
 
 ## 🛠 Tech Stack
 
-**Frontend**
-- React 18 + Vite
-- Redux Toolkit + redux-persist (state management)
-- React Router DOM (routing)
-- Tailwind CSS + shadcn/ui (Radix UI) components
-- Framer Motion (micro-animations)
-- Axios, Sonner (toasts), Lucide icons
+### Frontend
+| Technology | Purpose |
+|:-----------|:--------|
+| React 18 + Vite | UI framework and build tool |
+| Redux Toolkit + redux-persist | Global state management with persistence |
+| React Router DOM v7 | Client-side routing |
+| Tailwind CSS | Utility-first styling |
+| Radix UI (shadcn/ui) | Accessible UI primitives (Dialog, Select, Popover, etc.) |
+| Framer Motion | Micro-animations and transitions |
+| Axios | HTTP client for API calls |
+| Sonner | Toast notifications |
+| Lucide React | Icon set |
 
-**Backend**
-- Node.js + Express
-- MongoDB + Mongoose
-- JWT + bcryptjs (authentication)
-- Multer + Cloudinary (file/image uploads)
-- pdf-parse (PDF skill extraction from resumes)
-- Nodemailer (Gmail OAuth2) for OTP emails
-- Google Gemini API (optional, for dynamic LLM generation)
+### Backend
+| Technology | Purpose |
+|:-----------|:--------|
+| Node.js + Express | REST API server |
+| MongoDB + Mongoose | Database and ODM |
+| JWT + bcryptjs | Authentication and password hashing |
+| Multer + Cloudinary | File uploads (resumes, profile photos) |
+| pdf-parse | PDF text extraction for resume skill analysis |
+| Nodemailer + Gmail OAuth2 | OTP email verification and password reset |
+| Google Gemini API (optional) | Dynamic LLM generation for AI features |
+
+### AI / Data Layer
+| Technology | Purpose |
+|:-----------|:--------|
+| `resumeExtractor.js` | PDF skill parser with deduplication and normalization |
+| `aiFallbackService.js` | Grounded RAG engine for assistant, interview, and report generation |
+| `aiClient.js` | HTTP client for optional Python AI microservice |
+| Gemini 1.5 Flash | LLM for dynamic AI responses (when API key is set) |
 
 ---
 
 ## 📁 Project Structure
 
 ```
-JOB-PORTAL/
-├── Backend/
-│   ├── controllers/      # Route logic (user, job, company, application, AI)
-│   ├── models/           # Mongoose schemas (User, Job, Application, AIReport, Interview, etc.)
-│   ├── routes/           # Express routes
-│   ├── middleware/       # Auth (JWT) + Multer upload
-│   ├── utils/            # db, cloudinary, mailer, resumeExtractor, aiFallbackService
-│   ├── index.js          # App entry (Express server)
-│   └── .env              # Backend secrets (you create this)
+job-portal/
 │
-└── Frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── admincomponent/    # Recruiter dashboard, ATS, AI modals
-    │   │   └── components_lite/   # Job seeker views, ResumeAnalysis
-    │   ├── redux/         # Slices + store
-    │   ├── hooks/         # Custom data-fetching hooks
-    │   └── utils/data.js  # API base URLs
-    └── vite.config.js
+├── Backend/
+│   ├── controllers/
+│   │   ├── user.controller.js          # Register, login, OTP, profile
+│   │   ├── job.controller.js           # Post, search, filter jobs
+│   │   ├── company.controller.js       # Company CRUD
+│   │   ├── application.controller.js   # Apply, status updates
+│   │   └── ai.controller.js            # All AI features (resume, match, chat, interview, report)
+│   │
+│   ├── models/
+│   │   ├── user.model.js               # User schema (student / recruiter)
+│   │   ├── job.model.js                # Job schema
+│   │   ├── company.model.js            # Company schema
+│   │   ├── application.model.js        # Application schema
+│   │   ├── resumeAnalysis.model.js     # Extracted resume skills + raw text
+│   │   ├── candidateMatch.model.js     # Job match scores, matched/missing skills
+│   │   ├── interview.model.js          # AI interview questions + answers
+│   │   ├── aiReport.model.js           # Hiring report scorecard
+│   │   └── ragConversation.model.js    # AI assistant chat history
+│   │
+│   ├── routes/
+│   │   ├── user.route.js
+│   │   ├── job.route.js
+│   │   ├── company.route.js
+│   │   ├── application.route.js
+│   │   └── ai.route.js                 # All /api/ai/* endpoints
+│   │
+│   ├── middleware/
+│   │   ├── isAuthenticated.js          # JWT verification
+│   │   ├── optionalAuth.js             # Optional JWT (public routes)
+│   │   └── multer.js                   # File upload config
+│   │
+│   ├── utils/
+│   │   ├── db.js                       # MongoDB connection
+│   │   ├── cloud.js                    # Cloudinary config
+│   │   ├── datauri.js                  # Buffer → data URI helper
+│   │   ├── mailer.js                   # Nodemailer + Gmail OAuth2
+│   │   ├── resumeExtractor.js          # PDF text extraction + skill parser
+│   │   ├── aiFallbackService.js        # Grounded RAG engine (assistant, interview, report)
+│   │   └── aiClient.js                 # HTTP client for Python AI microservice
+│   │
+│   ├── index.js                        # Express app entry point
+│   ├── example.env                     # .env template (no secrets)
+│   └── .env                            # Your secrets (gitignored)
+│
+├── Frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── admincomponent/
+│   │   │   │   ├── ApplicantsTable.jsx       # ATS table with AI match scores + status
+│   │   │   │   ├── AIAssistantDrawer.jsx     # RAG recruiter chat drawer
+│   │   │   │   ├── AIInterviewModal.jsx      # AI interview question generator
+│   │   │   │   ├── AIReportModal.jsx         # AI hiring report scorecard
+│   │   │   │   ├── FormattedMessage.jsx      # Markdown renderer for AI chat
+│   │   │   │   ├── Applicants.jsx            # Applicants page wrapper
+│   │   │   │   ├── AdminJobs.jsx / AdminJobsTable.jsx
+│   │   │   │   ├── Companies.jsx / CompaniesTable.jsx
+│   │   │   │   ├── CompanyCreate.jsx / CompanySetup.jsx
+│   │   │   │   ├── PostJob.jsx
+│   │   │   │   └── ProtectedRoute.jsx
+│   │   │   │
+│   │   │   ├── components_lite/
+│   │   │   │   ├── Profile.jsx               # User profile with resume upload
+│   │   │   │   ├── ResumeAnalysis.jsx        # AI skill sync + match score view
+│   │   │   │   ├── JobMatchScore.jsx         # Per-job match score component
+│   │   │   │   ├── Description.jsx           # Job detail page
+│   │   │   │   ├── AppliedJob.jsx            # Applied jobs history
+│   │   │   │   ├── Home.jsx / Jobs.jsx / Browse.jsx
+│   │   │   │   ├── LatestJobs.jsx / JobCards.jsx / Job1.jsx
+│   │   │   │   ├── Navbar.jsx / Footer.jsx / Header.jsx
+│   │   │   │   ├── Filtercard.jsx / Categories.jsx
+│   │   │   │   ├── SavedJobs.jsx / RecommendedJobs.jsx
+│   │   │   │   ├── EditProfileModal.jsx
+│   │   │   │   ├── TermsAndConditions.jsx / TermsofService.jsx
+│   │   │   │   └── PrivacyPolicy.jsx
+│   │   │   │
+│   │   │   ├── authentication/
+│   │   │   │   ├── Login.jsx
+│   │   │   │   ├── Register.jsx
+│   │   │   │   ├── VerifyOtp.jsx
+│   │   │   │   └── ResetPassword.jsx
+│   │   │   │
+│   │   │   └── ui/                     # Radix UI / shadcn primitives
+│   │   │
+│   │   ├── redux/
+│   │   │   ├── store.js
+│   │   │   ├── authSlice.js
+│   │   │   ├── jobSlice.js
+│   │   │   ├── companyslice.js
+│   │   │   ├── applicationSlice.js
+│   │   │   └── aiSlice.js
+│   │   │
+│   │   ├── hooks/
+│   │   │   ├── useGetAllJobs.jsx
+│   │   │   ├── useGetAllJAdminobs.jsx
+│   │   │   ├── useGetAllAppliedJobs.jsx
+│   │   │   ├── useGetCompanyById.jsx
+│   │   │   └── usegetAllCompanies.jsx
+│   │   │
+│   │   └── utils/data.js               # API base URL constants
+│   │
+│   ├── index.html
+│   ├── vite.config.js
+│   └── tailwind.config.js
+│
+├── ai-service/                         # Optional Python FastAPI microservice
+│   ├── main.py
+│   ├── services/                       # matching, rag, interview, resume, llm
+│   └── utils/
+│
+└── README.md
 ```
 
 ---
