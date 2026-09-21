@@ -1,0 +1,1766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Portal — Complete Technical Interview Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500&display=swap');
+  
+  :root {
+    --primary: #6B3AC2;
+    --accent: #FA4F09;
+    --bg: #ffffff;
+    --text: #1a1a2e;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --code-bg: #f1f5f9;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 11pt;
+    max-width: 210mm;
+    margin: 0 auto;
+    padding: 15mm;
+    background: var(--bg);
+  }
+
+  @media print {
+    body { padding: 10mm; font-size: 9.5pt; }
+    .page-break { page-break-before: always; }
+    .no-print { display: none; }
+    h1, h2, h3 { page-break-after: avoid; }
+    pre, table { page-break-inside: avoid; }
+  }
+
+  h1 {
+    font-size: 28pt;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 5px;
+    letter-spacing: -1px;
+  }
+
+  h2 {
+    font-size: 17pt;
+    font-weight: 800;
+    color: var(--primary);
+    margin-top: 30px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 3px solid var(--primary);
+  }
+
+  h3 {
+    font-size: 13pt;
+    font-weight: 700;
+    color: var(--text);
+    margin-top: 20px;
+    margin-bottom: 8px;
+  }
+
+  h4 {
+    font-size: 11pt;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 15px;
+    margin-bottom: 6px;
+  }
+
+  p { margin-bottom: 8px; }
+
+  code {
+    font-family: 'Fira Code', monospace;
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #e11d48;
+  }
+
+  pre {
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 14px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: 'Fira Code', monospace;
+    font-size: 9pt;
+    line-height: 1.6;
+    margin: 10px 0 15px;
+  }
+
+  pre code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+  }
+
+  .kw { color: #c084fc; }
+  .fn { color: #67e8f9; }
+  .str { color: #86efac; }
+  .cmt { color: #64748b; font-style: italic; }
+  .num { color: #fbbf24; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0 15px;
+    font-size: 10pt;
+  }
+
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+  }
+
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tr:nth-child(even) { background: #f8fafc; }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 8pt;
+    font-weight: 600;
+  }
+
+  .badge-green { background: #dcfce7; color: #166534; }
+  .badge-blue { background: #dbeafe; color: #1e40af; }
+  .badge-orange { background: #ffedd5; color: #9a3412; }
+  .badge-purple { background: #f3e8ff; color: #6b21a8; }
+  .badge-red { background: #fef2f2; color: #991b1b; }
+
+  .qa-box {
+    border-left: 4px solid var(--primary);
+    background: #faf5ff;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .qa-box .q {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 6px;
+  }
+
+  .qa-box .a { color: var(--text); }
+
+  .hr-box {
+    border-left: 4px solid var(--accent);
+    background: #fff7ed;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .hr-box .q { font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+
+  .tip {
+    background: #ecfdf5;
+    border-left: 4px solid var(--success);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 10pt;
+  }
+
+  .warn {
+    background: #fffbeb;
+    border-left: 4px solid var(--warning);
+    padding: 10px 14px;
+    margin: 10px 0;
+    border-radius: 0 6px 6px 0;
+    font-size: 10pt;
+  }
+
+  .subtitle {
+    font-size: 13pt;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .toc { column-count: 2; column-gap: 20px; font-size: 10pt; margin: 15px 0; }
+  .toc a { color: var(--primary); text-decoration: none; }
+  .toc li { margin-bottom: 4px; }
+
+  ul, ol { margin-left: 20px; margin-bottom: 10px; }
+  li { margin-bottom: 3px; }
+
+  .flow-box {
+    background: #f8fafc;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin: 10px 0;
+    font-size: 10pt;
+  }
+
+  .flow-box .step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 6px;
+  }
+
+  .flow-box .num {
+    background: var(--primary);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10pt;
+    font-weight: 700;
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  .section-tag {
+    font-size: 8pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  
+  @media print { .two-col { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+
+<!-- ==================== COVER PAGE ==================== -->
+<div style="text-align:center; padding: 60px 0 30px;">
+  <div style="font-size:12pt; color:var(--muted); letter-spacing:3px; text-transform:uppercase; margin-bottom:15px;">Complete Technical Interview Guide</div>
+  <h1 style="font-size:36pt; line-height:1.1; border:none; margin-bottom:10px;">Job Portal</h1>
+  <div style="font-size:14pt; color:var(--accent); font-weight:600; margin-bottom:20px;">AI-Powered MERN Stack Application</div>
+  <div style="width:80px; height:4px; background:var(--primary); margin:20px auto;"></div>
+  <p style="font-size:11pt; color:var(--muted); max-width:450px; margin:0 auto 30px;">Full-stack job portal with resume analysis, AI matching, RAG assistant, interview generation & hiring reports — built with MongoDB, Express, React, Node.js + Gemini AI</p>
+  <div style="font-size:10pt; color:var(--muted);">Prepared for: <strong>Venkata Bhuvan</strong> | September 2026</div>
+</div>
+
+<div class="section-tag" style="margin-top:30px;">Table of Contents</div>
+<ol class="toc">
+  <li><a href="#ch1">Project Overview & Architecture</a></li>
+  <li><a href="#ch2">Tech Stack — Every Library Explained</a></li>
+  <li><a href="#ch3">Database Design (MongoDB + Mongoose)</a></li>
+  <li><a href="#ch4">Backend Architecture (Express.js)</a></li>
+  <li><a href="#ch5">Authentication & Security System</a></li>
+  <li><a href="#ch6">File Upload Pipeline (Multer + Cloudinary)</a></li>
+  <li><a href="#ch7">Email System (Nodemailer + OTP)</a></li>
+  <li><a href="#ch8">Frontend Architecture (React + Vite)</a></li>
+  <li><a href="#ch9">State Management (Redux Toolkit)</a></li>
+  <li><a href="#ch10">AI/ML Features — Deep Dive</a></li>
+  <li><a href="#ch11">API Design & RESTful Patterns</a></li>
+  <li><a href="#ch12">End-to-End Data Flows</a></li>
+  <li><a href="#ch13">Code Walkthrough — Key Files</a></li>
+  <li><a href="#ch14">Technical Interview Q&A (50+ Questions)</a></li>
+  <li><a href="#ch15">HR & Behavioral Interview Q&A</a></li>
+  <li><a href="#ch16">System Design & Scalability</a></li>
+  <li><a href="#ch17">Advanced React — Deep Interview Questions</a></li>
+  <li><a href="#ch18">Node.js Internals — Under the Hood</a></li>
+  <li><a href="#ch19">MongoDB Advanced — Aggregation, Indexing, Transactions</a></li>
+  <li><a href="#ch20">Performance Optimization & Best Practices</a></li>
+  <li><a href="#ch21">Testing — What's Missing & How to Answer</a></li>
+  <li><a href="#ch22">Git & DevOps Questions</a></li>
+  <li><a href="#ch23">Project Weaknesses — Gotcha Questions</a></li>
+  <li><a href="#ch24">Web Fundamentals & Networking</a></li>
+</ol>
+
+<!-- ==================== CHAPTER 1 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch1">Chapter 1: Project Overview & Architecture</h2>
+
+<h3>1.1 What Is This Project?</h3>
+<p>A full-stack <strong>AI-powered Job Portal</strong> with two user roles:</p>
+
+<table>
+  <tr><th>Role</th><th>Capabilities</th></tr>
+  <tr><td><span class="badge badge-green">Student (Job Seeker)</span></td><td>Register with OTP, browse/search/filter jobs, apply, upload resume (AI extracts skills), view match scores, save jobs, track application status</td></tr>
+  <tr><td><span class="badge badge-purple">Recruiter</span></td><td>Create companies, post jobs, view applicants (ATS), accept/reject, AI match scoring, RAG assistant, AI interview generator, AI hiring reports</td></tr>
+</table>
+
+<h3>1.2 Three-Service Architecture</h3>
+<p>The project runs <strong>3 independent services</strong> that communicate via HTTP:</p>
+
+<table>
+  <tr><th>Service</th><th>Technology</th><th>Port</th><th>Responsibility</th></tr>
+  <tr><td><strong>Frontend</strong></td><td>React + Vite</td><td>5173</td><td>User interface, client-side routing, state management</td></tr>
+  <tr><td><strong>Backend</strong></td><td>Node.js + Express</td><td>5011</td><td>REST API, business logic, auth, database operations</td></tr>
+  <tr><td><strong>AI Service</strong></td><td>Python + FastAPI</td><td>8000</td><td>Resume analysis, semantic matching, interview/report generation</td></tr>
+</table>
+
+<h3>1.3 Data Flow</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div>User opens browser → loads <strong>React app</strong> from Vite dev server (port 5173)</div></div>
+  <div class="step"><div class="num">2</div><div>React makes <strong>axios HTTP calls</strong> to Express backend (port 5011) with <code>withCredentials: true</code></div></div>
+  <div class="step"><div class="num">3</div><div>Express reads/writes data to <strong>MongoDB</strong> via Mongoose ODM</div></div>
+  <div class="step"><div class="num">4</div><div>For file uploads, Express uploads to <strong>Cloudinary</strong> (cloud storage) and stores the URL in MongoDB</div></div>
+  <div class="step"><div class="num">5</div><div>For AI features, Express calls the <strong>Python FastAPI</strong> service (port 8000) via <code>fetch()</code></div></div>
+  <div class="step"><div class="num">6</div><div>FastAPI calls <strong>Google Gemini API</strong> for LLM-powered responses</div></div>
+  <div class="step"><div class="num">7</div><div>If the AI service or Gemini is unavailable, Express uses <strong>built-in fallback engine</strong> (<code>aiFallbackService.js</code>)</div></div>
+</div>
+
+<h3>1.4 External Services</h3>
+<table>
+  <tr><th>Service</th><th>Purpose</th><th>Configured Via</th></tr>
+  <tr><td>MongoDB</td><td>Document database</td><td><code>MONGO_URI</code> in .env</td></tr>
+  <tr><td>Cloudinary</td><td>Cloud file storage (resumes, photos)</td><td><code>CLOUD_NAME</code>, <code>CLOUD_API</code>, <code>API_SECRET</code></td></tr>
+  <tr><td>Gmail SMTP</td><td>OTP email delivery</td><td><code>EMAIL_USER</code>, <code>EMAIL_PASS</code> or OAuth2 credentials</td></tr>
+  <tr><td>Google Gemini</td><td>LLM for AI features</td><td><code>GEMINI_API_KEY</code> (optional)</td></tr>
+</table>
+
+<!-- ==================== CHAPTER 2 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch2">Chapter 2: Tech Stack — Every Library Explained</h2>
+
+<h3>2.1 Backend Dependencies (package.json)</h3>
+<table>
+  <tr><th>Package</th><th>Version</th><th>What It Does</th><th>Interview Detail</th></tr>
+  <tr><td><code>express</code></td><td>^4.21</td><td>Web framework for Node.js</td><td>Handles routing, middleware pipeline, request/response cycle. Uses <code>app.use()</code> for middleware chaining.</td></tr>
+  <tr><td><code>mongoose</code></td><td>^8.8</td><td>MongoDB Object Document Mapper</td><td>Defines schemas with validation, provides <code>.find()</code>, <code>.populate()</code>, <code>.save()</code>. Converts MongoDB documents to JavaScript objects.</td></tr>
+  <tr><td><code>jsonwebtoken</code></td><td>^9.0</td><td>JWT token creation/verification</td><td><code>jwt.sign(payload, secret, {expiresIn})</code> creates token. <code>jwt.verify(token, secret)</code> decodes it. Stateless authentication.</td></tr>
+  <tr><td><code>bcryptjs</code></td><td>^2.4</td><td>Password hashing</td><td><code>bcrypt.hash(password, 10)</code> creates hash with 10 salt rounds. <code>bcrypt.compare(input, hash)</code> verifies. One-way — cannot be reversed.</td></tr>
+  <tr><td><code>multer</code></td><td>^1.4</td><td>File upload middleware</td><td>Uses <code>memoryStorage()</code> to store file as Buffer in <code>req.file</code>. <code>.single("file")</code> handles one file upload.</td></tr>
+  <tr><td><code>cloudinary</code></td><td>^2.5</td><td>Cloud file hosting</td><td><code>cloudinary.uploader.upload(dataURI)</code> uploads and returns <code>secure_url</code>. Supports images and raw files (PDFs).</td></tr>
+  <tr><td><code>cookie-parser</code></td><td>^1.4</td><td>Parse HTTP cookies</td><td>Makes <code>req.cookies</code> available. Required because JWT is stored in an httpOnly cookie.</td></tr>
+  <tr><td><code>cors</code></td><td>^2.8</td><td>Cross-Origin Resource Sharing</td><td>Allows frontend (port 5173) to call backend (port 5011). <code>credentials: true</code> enables cookie sharing.</td></tr>
+  <tr><td><code>dotenv</code></td><td>^16.4</td><td>Environment variables</td><td>Loads <code>.env</code> file into <code>process.env</code>. Keeps secrets out of source code.</td></tr>
+  <tr><td><code>datauri</code></td><td>^4.1</td><td>Buffer → Data URI conversion</td><td>Converts file buffer to <code>data:application/pdf;base64,...</code> format that Cloudinary accepts.</td></tr>
+  <tr><td><code>nodemailer</code></td><td>^9.0</td><td>Email sending</td><td>Creates SMTP transporter with Gmail credentials. Sends HTML emails with OTP codes.</td></tr>
+  <tr><td><code>pdf-parse</code></td><td>^2.4</td><td>PDF text extraction</td><td>Extracts plaintext from PDF buffers. Used to parse skills from resumes.</td></tr>
+  <tr><td><code>nodemon</code></td><td>^3.1</td><td>Auto-restart on file changes</td><td>Dev dependency. Watches <code>.js</code> files and restarts server on save. <code>npm run dev</code> uses it.</td></tr>
+</table>
+
+<h3>2.2 Frontend Dependencies</h3>
+<table>
+  <tr><th>Package</th><th>What It Does</th><th>Interview Detail</th></tr>
+  <tr><td><code>react</code> v18</td><td>UI component library</td><td>Uses functional components + hooks. Virtual DOM for efficient re-rendering.</td></tr>
+  <tr><td><code>vite</code></td><td>Build tool + dev server</td><td>ES module based HMR (Hot Module Replacement). 10-100x faster than Webpack. Uses <code>import.meta.env</code> for env vars.</td></tr>
+  <tr><td><code>react-router-dom</code> v7</td><td>Client-side routing</td><td><code>createBrowserRouter</code> defines routes. <code>useNavigate()</code> for programmatic navigation. <code>useParams()</code> for URL params.</td></tr>
+  <tr><td><code>@reduxjs/toolkit</code></td><td>State management</td><td><code>createSlice</code> generates actions + reducers. <code>configureStore</code> sets up store. Uses Immer for immutable updates.</td></tr>
+  <tr><td><code>redux-persist</code></td><td>Persist Redux to localStorage</td><td>Wraps reducer with <code>persistReducer</code>. State survives page refresh. Must handle <code>RESET_STORE</code> on logout.</td></tr>
+  <tr><td><code>axios</code></td><td>HTTP client</td><td>Promise-based. <code>withCredentials: true</code> sends cookies. Automatic JSON parsing. Better error handling than fetch.</td></tr>
+  <tr><td><code>tailwindcss</code></td><td>Utility-first CSS</td><td>Classes like <code>bg-blue-500 p-4 rounded-lg</code>. No custom CSS files needed. Purges unused styles in production.</td></tr>
+  <tr><td><code>@radix-ui/*</code> (shadcn/ui)</td><td>Accessible UI primitives</td><td>Unstyled, accessible components (Dialog, Select, Popover). shadcn/ui adds Tailwind styling on top.</td></tr>
+  <tr><td><code>framer-motion</code></td><td>Animations</td><td><code>&lt;motion.div animate={{opacity:1}}&gt;</code>. Declarative animations for page transitions.</td></tr>
+  <tr><td><code>sonner</code></td><td>Toast notifications</td><td><code>toast.success("Saved!")</code>. Renders temporary popup messages.</td></tr>
+  <tr><td><code>lucide-react</code></td><td>Icon library</td><td>Tree-shakeable SVG icons. <code>&lt;Search /&gt;</code>, <code>&lt;Bookmark /&gt;</code>, etc.</td></tr>
+</table>
+
+<h3>2.3 AI Service Dependencies (Python)</h3>
+<table>
+  <tr><th>Package</th><th>What It Does</th></tr>
+  <tr><td><code>fastapi</code></td><td>Modern Python web framework with auto-generated Swagger docs. Uses <code>async/await</code>, Pydantic models for validation.</td></tr>
+  <tr><td><code>uvicorn</code></td><td>ASGI server that runs FastAPI. Equivalent of <code>node index.js</code> for Python.</td></tr>
+  <tr><td><code>google-genai</code></td><td>Official Google Gemini SDK. Calls <code>gemini-1.5-flash</code> model for text generation.</td></tr>
+  <tr><td><code>sentence-transformers</code></td><td>ML library for text embeddings. Converts text to vectors for semantic similarity comparison.</td></tr>
+  <tr><td><code>pdfplumber</code></td><td>PDF text extraction (alternative to pdf-parse). Better table extraction.</td></tr>
+  <tr><td><code>nltk</code></td><td>Natural Language Toolkit. Tokenization, stopword removal for text processing.</td></tr>
+  <tr><td><code>pydantic</code></td><td>Data validation. Defines request/response schemas as Python classes.</td></tr>
+</table>
+
+<!-- ==================== CHAPTER 3 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch3">Chapter 3: Database Design (MongoDB + Mongoose)</h2>
+
+<h3>3.1 Why MongoDB?</h3>
+<ul>
+  <li><strong>Schema flexibility</strong> — user profiles have nested objects (bio, skills array, photo URL). Relational DBs would need multiple tables + JOINs.</li>
+  <li><strong>JSON-native</strong> — JavaScript objects map directly to MongoDB documents. No ORM impedance mismatch.</li>
+  <li><strong>Embedded documents</strong> — <code>user.profile.skills</code> is an array inside the user document. In SQL, this would need a separate <code>user_skills</code> junction table.</li>
+  <li><strong>ObjectId references</strong> — <code>mongoose.Schema.Types.ObjectId</code> with <code>ref</code> enables <code>.populate()</code> (similar to SQL JOINs).</li>
+</ul>
+
+<h3>3.2 All 9 Schemas Explained</h3>
+
+<h4>User Schema (user.model.js) — 69 lines</h4>
+<pre><code><span class="kw">const</span> userSchema = <span class="kw">new</span> mongoose.Schema({
+  fullname:    { type: String, required: <span class="num">true</span> },
+  email:       { type: String, required: <span class="num">true</span>, unique: <span class="num">true</span> },
+  phoneNumber: { type: String, required: <span class="num">true</span>, unique: <span class="num">true</span> },
+  password:    { type: String, required: <span class="num">true</span> },      <span class="cmt">// bcrypt hash</span>
+  isVerified:  { type: Boolean, default: <span class="num">false</span> },    <span class="cmt">// true after OTP</span>
+  otp:         { type: String },                      <span class="cmt">// temporary 6-digit</span>
+  otpExpiry:   { type: Date },                        <span class="cmt">// +10 minutes</span>
+  role:        { type: String, enum: [<span class="str">"Student"</span>, <span class="str">"Recruiter"</span>] },
+  profile: {
+    bio:               String,
+    skills:            [String],      <span class="cmt">// ["React", "Node.js"]</span>
+    resume:            String,        <span class="cmt">// Google Drive link</span>
+    resumeFile:        String,        <span class="cmt">// Cloudinary uploaded PDF URL</span>
+    resumeOriginalName: String,
+    profilePhoto:      String,        <span class="cmt">// Cloudinary photo URL</span>
+    company:           ObjectId → Company
+  },
+  termsAcceptedAt: Date
+}, { timestamps: <span class="num">true</span> });  <span class="cmt">// adds createdAt, updatedAt</span></code></pre>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why is <code>profile</code> an embedded object instead of a separate collection?</div>
+  <div class="a"><strong>Answer:</strong> Because a user's profile is always accessed alongside the user (1:1 relationship). Embedding eliminates an extra database query. In MongoDB, if you always read/write related data together, embed it. If it's accessed independently or has a many-to-many relationship, use references.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why store <code>password</code> as a hash and not plaintext?</div>
+  <div class="a"><strong>Answer:</strong> Security. If the database is breached, attackers can't read actual passwords. <code>bcrypt.hash(password, 10)</code> creates a one-way hash with 10 salt rounds. Even the same password produces different hashes (due to unique salt per hash). Verification uses <code>bcrypt.compare(input, storedHash)</code>.</div>
+</div>
+
+<h4>Job Schema (job.model.js)</h4>
+<p>Key fields: <code>title</code>, <code>description</code>, <code>requirements: [String]</code> (split from comma-separated input), <code>salary</code>, <code>experienceLevel</code>, <code>location</code>, <code>jobType</code>, <code>position</code> (openings count), <code>company: ObjectId → Company</code>, <code>created_by: ObjectId → User</code>, <code>applications: [ObjectId → Application]</code></p>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why is <code>applications</code> stored as an array of ObjectIds in the Job document?</div>
+  <div class="a"><strong>Answer:</strong> This enables efficient <code>.populate("applications")</code> to load all applicants in one query. The recruiter's Applicants page needs to display all applicants for a job — without this array, we'd need a separate <code>Application.find({job: jobId})</code> query. The tradeoff: the Job document grows with each application, but for typical job postings (10-500 applicants), this is acceptable.</div>
+</div>
+
+<h4>Application Schema (application.model.js)</h4>
+<pre><code>Application {
+  job:       ObjectId → Job,
+  applicant: ObjectId → User,
+  status:    <span class="str">"pending"</span> | <span class="str">"accepted"</span> | <span class="str">"rejected"</span>
+}</code></pre>
+<p>This is a <strong>junction/bridge model</strong> that connects Users to Jobs in a many-to-many relationship. One user can apply to many jobs; one job can have many applicants.</p>
+
+<h4>Company Schema (company.model.js)</h4>
+<p>Fields: <code>name</code> (unique), <code>description</code>, <code>website</code>, <code>location</code>, <code>logo</code> (Cloudinary URL), <code>userId: ObjectId → User</code>. A recruiter must create a company before posting jobs.</p>
+
+<h4>AI-Related Schemas</h4>
+<table>
+  <tr><th>Model</th><th>Key Fields</th><th>Purpose</th></tr>
+  <tr><td>ResumeAnalysis</td><td>user, rawText, skills[], education[], experience[], projects[], summary</td><td>Stores parsed resume data. One per user (upserted).</td></tr>
+  <tr><td>CandidateMatch</td><td>candidate, job, overallScore, matchedSkills[], missingSkills[]</td><td>Cached match score. One per (candidate, job) pair.</td></tr>
+  <tr><td>Interview</td><td>application, questions[{question, idealAnswer, category}], candidateAnswers[]</td><td>AI-generated interview with 5 questions.</td></tr>
+  <tr><td>AIReport</td><td>application, overallScore, breakdown{}, strengths[], gaps[], recommendation</td><td>Hiring scorecard with weighted evaluation.</td></tr>
+  <tr><td>RAGConversation</td><td>recruiter, job, messages[{role, content, timestamp}]</td><td>Chat history with AI assistant.</td></tr>
+</table>
+
+<h3>3.3 Mongoose Key Concepts</h3>
+<table>
+  <tr><th>Concept</th><th>Code Example</th><th>Explanation</th></tr>
+  <tr><td><code>.populate()</code></td><td><code>Job.find().populate("company")</code></td><td>Replaces ObjectId with the actual document. Like SQL JOIN.</td></tr>
+  <tr><td><code>timestamps: true</code></td><td>Schema option</td><td>Auto-adds <code>createdAt</code> and <code>updatedAt</code> fields.</td></tr>
+  <tr><td><code>unique: true</code></td><td><code>email: {unique: true}</code></td><td>Creates a unique index. DB rejects duplicate emails.</td></tr>
+  <tr><td><code>enum</code></td><td><code>role: {enum: ["Student","Recruiter"]}</code></td><td>Restricts values. DB rejects invalid roles.</td></tr>
+  <tr><td><code>findOneAndUpdate</code></td><td><code>Model.findOneAndUpdate(filter, update, {upsert:true})</code></td><td>Update if exists, create if not. Atomic operation.</td></tr>
+  <tr><td><code>ref</code></td><td><code>company: {type: ObjectId, ref: "Company"}</code></td><td>Tells Mongoose which collection to populate from.</td></tr>
+</table>
+
+<!-- ==================== CHAPTER 4 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch4">Chapter 4: Backend Architecture (Express.js)</h2>
+
+<h3>4.1 Entry Point — index.js (60 lines)</h3>
+<p>The Express app initialization follows this exact order:</p>
+<pre><code><span class="cmt">// 1. Load environment variables</span>
+dotenv.config();
+
+<span class="cmt">// 2. Create Express app</span>
+<span class="kw">const</span> app = express();
+
+<span class="cmt">// 3. Body parsing middleware</span>
+app.use(express.json());              <span class="cmt">// Parse JSON bodies</span>
+app.use(express.urlencoded({extended: <span class="num">true</span>})); <span class="cmt">// Parse form data</span>
+app.use(cookieParser());              <span class="cmt">// Parse cookies</span>
+
+<span class="cmt">// 4. CORS configuration</span>
+<span class="kw">const</span> allowedOrigins = process.env.CORS_ORIGIN.split(<span class="str">","</span>).map(o => o.trim());
+app.use(cors({ origin: allowedOrigins, credentials: <span class="num">true</span> }));
+
+<span class="cmt">// 5. Route mounting</span>
+app.use(<span class="str">"/api/user"</span>, userRoute);
+app.use(<span class="str">"/api/company"</span>, companyRoute);
+app.use(<span class="str">"/api/job"</span>, jobRoute);
+app.use(<span class="str">"/api/application"</span>, applicationRoute);
+app.use(<span class="str">"/api/ai"</span>, aiRoute);
+
+<span class="cmt">// 6. Production: serve React build</span>
+<span class="kw">if</span> (process.env.NODE_ENV === <span class="str">"production"</span>) {
+  app.use(express.static(<span class="str">'./Frontend/dist'</span>));
+  app.get(<span class="str">'*'</span>, (req, res) => res.sendFile(<span class="str">'index.html'</span>));
+}
+
+<span class="cmt">// 7. Start server + connect DB</span>
+app.listen(<span class="num">5011</span>, () => { connectDB(); });</code></pre>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why is middleware order important in Express?</div>
+  <div class="a"><strong>Answer:</strong> Express processes middleware in the order they are registered. <code>express.json()</code> must come before routes, otherwise <code>req.body</code> will be <code>undefined</code>. <code>cookieParser()</code> must come before auth middleware, otherwise <code>req.cookies</code> is unavailable. If CORS middleware comes after routes, preflight OPTIONS requests will fail.</div>
+</div>
+
+<h3>4.2 The MVC Pattern</h3>
+<p>This project follows <strong>Routes → Middleware → Controllers → Models</strong>:</p>
+
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><strong>Route</strong> — Defines URL pattern + HTTP method: <code>router.post("/login", login)</code></div></div>
+  <div class="step"><div class="num">2</div><div><strong>Middleware</strong> — Runs before controller: <code>isAuthenticated</code> checks JWT, <code>singleUpload</code> handles file</div></div>
+  <div class="step"><div class="num">3</div><div><strong>Controller</strong> — Business logic: validates input, queries DB, returns JSON response</div></div>
+  <div class="step"><div class="num">4</div><div><strong>Model</strong> — Database operations: <code>User.findOne({email})</code>, <code>user.save()</code></div></div>
+</div>
+
+<h3>4.3 Three Types of Middleware</h3>
+<table>
+  <tr><th>Middleware</th><th>File</th><th>Purpose</th><th>How It Works</th></tr>
+  <tr><td><code>isAuthenticated</code></td><td>isAuthenticated.js</td><td>Blocks unauthenticated users</td><td>Reads JWT from <code>req.cookies.token</code>, verifies with <code>jwt.verify()</code>, sets <code>req.id = userId</code></td></tr>
+  <tr><td><code>optionalAuth</code></td><td>optionalAuth.js</td><td>Attaches userId if logged in, but doesn't block</td><td>Same as above but calls <code>next()</code> even if no token. Used on public routes that behave differently for logged-in users.</td></tr>
+  <tr><td><code>singleUpload</code></td><td>multer.js</td><td>Handles file upload</td><td><code>multer({storage: memoryStorage()}).single("file")</code> — stores file in <code>req.file.buffer</code></td></tr>
+</table>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: What is optionalAuth and when would you use it?</div>
+  <div class="a"><strong>Answer:</strong> <code>optionalAuth</code> is used on public routes where behavior changes based on login status. Example: the job details page (<code>GET /api/job/get/:id</code>) shows an "Apply" button if the user hasn't applied, or "Already Applied" if they have. A guest (not logged in) just sees the job info. <code>optionalAuth</code> tries to extract userId from the JWT cookie but never blocks — if there's no cookie or it's expired, it simply calls <code>next()</code>.</div>
+</div>
+
+<h3>4.4 Response Pattern</h3>
+<p>Every API response follows a consistent format:</p>
+<pre><code><span class="cmt">// Success</span>
+res.status(<span class="num">200</span>).json({ message: <span class="str">"Profile updated"</span>, success: <span class="num">true</span>, user: {...} });
+
+<span class="cmt">// Error</span>
+res.status(<span class="num">400</span>).json({ message: <span class="str">"Email already exists"</span>, success: <span class="num">false</span> });
+
+<span class="cmt">// Server Error</span>
+res.status(<span class="num">500</span>).json({ message: <span class="str">"Server Error"</span>, success: <span class="num">false</span> });</code></pre>
+
+<!-- ==================== CHAPTER 5 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch5">Chapter 5: Authentication & Security System</h2>
+
+<h3>5.1 JWT (JSON Web Token) Deep Dive</h3>
+<p><strong>What is JWT?</strong> A digitally signed token containing user data. Structure: <code>header.payload.signature</code></p>
+
+<h4>Token Creation (Login):</h4>
+<pre><code><span class="kw">const</span> token = jwt.sign(
+  { userId: user._id },              <span class="cmt">// Payload (data stored in token)</span>
+  process.env.JWT_SECRET,             <span class="cmt">// Secret key (never exposed)</span>
+  { expiresIn: <span class="str">"1d"</span> }                <span class="cmt">// Expires in 24 hours</span>
+);
+
+res.cookie(<span class="str">"token"</span>, token, {
+  maxAge: 1 * 24 * 60 * 60 * 1000,   <span class="cmt">// 24 hours in milliseconds</span>
+  httpOnly: <span class="num">true</span>,                     <span class="cmt">// JavaScript cannot access</span>
+  sameSite: <span class="str">"Strict"</span>,                 <span class="cmt">// CSRF protection</span>
+});</code></pre>
+
+<h4>Token Verification (Every Protected Request):</h4>
+<pre><code><span class="kw">const</span> token = req.cookies.token;        <span class="cmt">// Read from cookie</span>
+<span class="kw">const</span> decoded = jwt.verify(token, JWT_SECRET); <span class="cmt">// Verify signature</span>
+req.id = decoded.userId;                <span class="cmt">// Attach to request</span></code></pre>
+
+<h3>5.2 Security Features</h3>
+<table>
+  <tr><th>Feature</th><th>Implementation</th><th>Protection Against</th></tr>
+  <tr><td>Password Hashing</td><td><code>bcrypt.hash(password, 10)</code></td><td>Database breach — passwords can't be read</td></tr>
+  <tr><td>httpOnly Cookie</td><td><code>httpOnly: true</code> on JWT cookie</td><td>XSS — JavaScript can't steal the token</td></tr>
+  <tr><td>sameSite: Strict</td><td>Cookie not sent on cross-site requests</td><td>CSRF — malicious sites can't trigger authenticated requests</td></tr>
+  <tr><td>Email Verification</td><td>OTP sent on registration</td><td>Fake accounts — email must be real and accessible</td></tr>
+  <tr><td>Role-Based Access</td><td><code>role: "Student" | "Recruiter"</code></td><td>Unauthorized access — students can't post jobs, recruiters can't apply</td></tr>
+  <tr><td>Owner Authorization</td><td><code>job.created_by !== userId → 403</code></td><td>One recruiter editing another's jobs/companies</td></tr>
+  <tr><td>OTP Expiry</td><td><code>otpExpiry < new Date()</code></td><td>Replay attacks — OTP only valid for 10 minutes</td></tr>
+</table>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why use httpOnly cookies instead of localStorage for JWT?</div>
+  <div class="a"><strong>Answer:</strong> <code>httpOnly</code> cookies are <strong>inaccessible to JavaScript</strong>. If there's an XSS vulnerability (e.g., injected script on the page), the attacker <em>cannot</em> read the JWT and steal the session. With localStorage, any JavaScript on the page (including injected malicious scripts) can read <code>localStorage.getItem("token")</code>. The tradeoff: cookies are automatically sent with every request (via <code>withCredentials: true</code>), which is why we also need <code>sameSite: "Strict"</code> to prevent CSRF.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: What are salt rounds in bcrypt?</div>
+  <div class="a"><strong>Answer:</strong> The number <code>10</code> in <code>bcrypt.hash(password, 10)</code> is the cost factor (2^10 = 1024 iterations). Higher = slower = harder to brute force. Each hash has a unique random salt embedded in it, so the same password produces different hashes. This prevents rainbow table attacks. Industry standard is 10-12 rounds.</div>
+</div>
+
+<h3>5.3 Complete OTP Flow</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><strong>Register:</strong> User submits form → <code>generateOtp()</code> creates 6-digit code: <code>Math.floor(100000 + Math.random() * 900000)</code></div></div>
+  <div class="step"><div class="num">2</div><div><strong>Save:</strong> User saved with <code>isVerified: false</code>, <code>otp: "483921"</code>, <code>otpExpiry: Date.now() + 10min</code></div></div>
+  <div class="step"><div class="num">3</div><div><strong>Email:</strong> Nodemailer sends HTML email with the OTP to user's email</div></div>
+  <div class="step"><div class="num">4</div><div><strong>Verify:</strong> User enters OTP → backend checks <code>user.otp === inputOtp</code> AND <code>otpExpiry > now</code></div></div>
+  <div class="step"><div class="num">5</div><div><strong>Activate:</strong> Sets <code>isVerified: true</code>, clears <code>otp</code> and <code>otpExpiry</code></div></div>
+  <div class="step"><div class="num">6</div><div><strong>Auto-login:</strong> Creates JWT cookie immediately — user doesn't need to login again</div></div>
+</div>
+
+<!-- ==================== CHAPTER 6 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch6">Chapter 6: File Upload Pipeline</h2>
+
+<h3>6.1 The Upload Flow</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><strong>Frontend:</strong> User selects file → stored in <code>FormData</code> with key <code>"file"</code></div></div>
+  <div class="step"><div class="num">2</div><div><strong>Multer middleware:</strong> <code>multer.memoryStorage().single("file")</code> reads the upload into <code>req.file.buffer</code> (RAM, not disk)</div></div>
+  <div class="step"><div class="num">3</div><div><strong>DataURI conversion:</strong> <code>getDataUri(req.file)</code> converts Buffer → <code>"data:image/png;base64,iVBOR..."</code></div></div>
+  <div class="step"><div class="num">4</div><div><strong>Cloudinary upload:</strong> <code>cloudinary.uploader.upload(dataURI)</code> → returns <code>{ secure_url: "https://res.cloudinary.com/..." }</code></div></div>
+  <div class="step"><div class="num">5</div><div><strong>MongoDB save:</strong> <code>user.profile.profilePhoto = secure_url</code> → <code>user.save()</code></div></div>
+</div>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why use memoryStorage instead of diskStorage in Multer?</div>
+  <div class="a"><strong>Answer:</strong> With <code>memoryStorage</code>, the file stays in RAM as a Buffer. This is ideal because we immediately convert it to a DataURI and upload to Cloudinary — we never need to save it to disk. <code>diskStorage</code> would write to a temp file, then we'd read it back, then upload, then delete the temp file — unnecessary I/O. The tradeoff: large files could consume too much RAM, but for resumes and profile photos (< 10MB), this is fine.</div>
+</div>
+
+<!-- ==================== CHAPTER 7 ==================== -->
+<h2 id="ch7">Chapter 7: Email System (Nodemailer)</h2>
+
+<h3>7.1 Dual Authentication Support</h3>
+<p>The mailer supports <strong>two Gmail auth methods</strong>:</p>
+
+<table>
+  <tr><th>Method</th><th>How It Works</th><th>When Used</th></tr>
+  <tr><td>App Password</td><td><code>EMAIL_PASS</code> in .env</td><td>Simpler. Gmail generates a 16-char password for apps. Used when <code>EMAIL_PASS</code> is set.</td></tr>
+  <tr><td>OAuth2</td><td><code>CLIENT_ID</code>, <code>CLIENT_SECRET</code>, <code>REFRESH_TOKEN</code></td><td>More secure. Uses Google OAuth2 flow. Used when App Password is not set.</td></tr>
+</table>
+
+<h3>7.2 Dev Mode Fallback</h3>
+<pre><code><span class="kw">if</span> (!hasAppPass && !hasOAuth2) {
+  console.log(<span class="str">`[DEV MODE] OTP for ${email}: ${otp}`</span>);
+  <span class="kw">return</span>;  <span class="cmt">// Skip email, just log to console</span>
+}</code></pre>
+<p>If no email credentials are configured, the OTP is printed to the server console. This enables development without Gmail setup.</p>
+
+<!-- ==================== CHAPTER 8 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch8">Chapter 8: Frontend Architecture (React + Vite)</h2>
+
+<h3>8.1 Component Hierarchy</h3>
+<pre><code>main.jsx
+└── <span class="fn">Provider</span> (Redux store)
+    └── <span class="fn">PersistGate</span> (localStorage persistence)
+        ├── <span class="fn">App</span> (RouterProvider)
+        │   ├── <span class="fn">Home</span> → Navbar + Header + Categories + LatestJobs + Footer
+        │   ├── <span class="fn">Login</span> → form with email, password, role radio
+        │   ├── <span class="fn">Register</span> → form with fullname, email, phone, password, role, photo
+        │   ├── <span class="fn">VerifyOtp</span> → 6-digit OTP input
+        │   ├── <span class="fn">Jobs</span> → FilterCard (sidebar) + Job1 cards
+        │   ├── <span class="fn">Description</span> → single job detail + Apply button
+        │   ├── <span class="fn">Profile</span> → user info + ResumeAnalysis + AppliedJob list
+        │   ├── <span class="fn">ProtectedRoute</span> (recruiter wrapper)
+        │   │   ├── <span class="fn">Companies</span> → CompaniesTable
+        │   │   ├── <span class="fn">AdminJobs</span> → AdminJobsTable
+        │   │   ├── <span class="fn">PostJob</span> → job creation form
+        │   │   └── <span class="fn">Applicants</span> → ApplicantsTable + AI tools
+        │   │       ├── <span class="fn">AIAssistantDrawer</span> (RAG chat)
+        │   │       ├── <span class="fn">AIInterviewModal</span> (question generator)
+        │   │       └── <span class="fn">AIReportModal</span> (hiring scorecard)
+        └── <span class="fn">Toaster</span> (sonner toast notifications)</code></pre>
+
+<h3>8.2 Key React Patterns Used</h3>
+<table>
+  <tr><th>Pattern</th><th>Example in This Project</th><th>Why It's Used</th></tr>
+  <tr><td><strong>Controlled Components</strong></td><td><code>Login.jsx</code>: <code>value={input.email} onChange={changeEventHandler}</code></td><td>React controls form state. Enables validation, submission handling.</td></tr>
+  <tr><td><strong>Custom Hooks</strong></td><td><code>useGetAllJobs()</code></td><td>Encapsulates data fetching logic. Reusable across components.</td></tr>
+  <tr><td><strong>Conditional Rendering</strong></td><td><code>{loading ? &lt;Spinner/&gt; : &lt;Button/&gt;}</code></td><td>Shows loading state during API calls.</td></tr>
+  <tr><td><strong>Protected Routes</strong></td><td><code>&lt;ProtectedRoute&gt;&lt;AdminJobs/&gt;&lt;/ProtectedRoute&gt;</code></td><td>Wraps recruiter pages. Redirects if role ≠ Recruiter.</td></tr>
+  <tr><td><strong>useEffect for Data Fetching</strong></td><td><code>useGetAllJobs</code>: <code>useEffect(() => fetchJobs(), [searchedQuery])</code></td><td>Runs fetch on mount and when search query changes.</td></tr>
+  <tr><td><strong>useSelector / useDispatch</strong></td><td><code>const {user} = useSelector(s => s.auth)</code></td><td>Reads Redux state / dispatches actions.</td></tr>
+</table>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Explain the Login component data flow.</div>
+  <div class="a"><strong>Answer:</strong> (1) <code>useState</code> manages form inputs {email, password, role}. (2) <code>onChange</code> handler uses computed property name: <code>{...input, [e.target.name]: e.target.value}</code>. (3) On submit, <code>dispatch(setLoading(true))</code> shows spinner. (4) <code>axios.post</code> sends credentials with <code>withCredentials: true</code>. (5) Backend sets JWT cookie. (6) On success: <code>dispatch({type: RESET_STORE})</code> clears old data, then <code>dispatch(setUser(user))</code> stores user. (7) <code>navigate("/")</code> redirects to home. (8) <code>toast.success()</code> shows notification. (9) <code>useEffect</code> redirects to "/" if user already logged in. (10) On error, if <code>needVerification: true</code>, redirects to OTP page.</div>
+</div>
+
+<h3>8.3 API Communication</h3>
+<pre><code><span class="cmt">// Frontend/src/utils/data.js — Centralized API URLs</span>
+<span class="kw">const</span> API_BASE = import.meta.env.VITE_API_BASE_URL ?? <span class="str">"http://localhost:5011"</span>;
+
+<span class="kw">export const</span> USER_API_ENDPOINT = <span class="str">`${API_BASE}/api/user`</span>;
+<span class="kw">export const</span> JOB_API_ENDPOINT = <span class="str">`${API_BASE}/api/job`</span>;
+<span class="kw">export const</span> APPLICATION_API_ENDPOINT = <span class="str">`${API_BASE}/api/application`</span>;
+<span class="kw">export const</span> AI_API_ENDPOINT = <span class="str">`${API_BASE}/api/ai`</span>;</code></pre>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why <code>import.meta.env</code> instead of <code>process.env</code>?</div>
+  <div class="a"><strong>Answer:</strong> Vite uses <code>import.meta.env</code> for environment variables (ES modules standard). Only variables prefixed with <code>VITE_</code> are exposed to the browser. <code>process.env</code> is a Node.js API — it doesn't exist in the browser. Webpack/CRA used <code>process.env.REACT_APP_*</code> by injecting it at build time, but Vite uses the native ES import.meta approach.</div>
+</div>
+
+<!-- ==================== CHAPTER 9 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch9">Chapter 9: State Management (Redux Toolkit)</h2>
+
+<h3>9.1 Store Architecture</h3>
+<pre><code><span class="kw">const</span> rootReducer = combineReducers({
+  auth:        authReducer,      <span class="cmt">// { user, loading }</span>
+  job:         jobReducer,       <span class="cmt">// { allJobs, singleJob, savedJobs, ... }</span>
+  company:     companyReducer,   <span class="cmt">// { singleCompany, companies }</span>
+  application: applicationSlice, <span class="cmt">// { applicants }</span>
+  ai:          aiReducer,        <span class="cmt">// { resumeAnalysis, matchScores }</span>
+});</code></pre>
+
+<h3>9.2 RESET_STORE Pattern</h3>
+<pre><code><span class="kw">const</span> rootReducer = (state, action) => {
+  <span class="kw">if</span> (action.type === <span class="str">"RESET_STORE"</span>) {
+    state = <span class="kw">undefined</span>;  <span class="cmt">// Forces all slices to return initialState</span>
+  }
+  <span class="kw">return</span> appReducer(state, action);
+};</code></pre>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: Why dispatch RESET_STORE on login, not just on logout?</div>
+  <div class="a"><strong>Answer:</strong> Because <code>redux-persist</code> saves state to <code>localStorage</code>. If User A logs out but the persist data isn't fully cleared (race condition, browser crash, etc.), User B logging in on the same browser would see User A's saved jobs, applied jobs, and private data. Dispatching <code>RESET_STORE</code> right before <code>setUser(newUser)</code> guarantees a clean slate.</div>
+</div>
+
+<h3>9.3 Custom Hooks — Data Fetching Pattern</h3>
+<pre><code><span class="cmt">// hooks/useGetAllJobs.jsx</span>
+<span class="kw">const</span> useGetAllJobs = () => {
+  <span class="kw">const</span> dispatch = useDispatch();
+  <span class="kw">const</span> { searchedQuery } = useSelector(s => s.job);
+
+  useEffect(() => {
+    <span class="kw">const</span> fetchAllJobs = <span class="kw">async</span> () => {
+      <span class="kw">const</span> res = <span class="kw">await</span> axios.get(
+        <span class="str">`${JOB_API_ENDPOINT}/get?keyword=${searchedQuery}`</span>,
+        { withCredentials: <span class="num">true</span> }
+      );
+      dispatch(setAllJobs(res.data.jobs));
+    };
+    fetchAllJobs();
+  }, [dispatch, searchedQuery]); <span class="cmt">// Re-fetches when query changes</span>
+};</code></pre>
+
+<!-- ==================== CHAPTER 10 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch10">Chapter 10: AI/ML Features — Deep Dive</h2>
+
+<h3>10.1 Dual-Engine Architecture</h3>
+<table>
+  <tr><th>Engine</th><th>When Used</th><th>Technology</th></tr>
+  <tr><td><span class="badge badge-green">Python AI Service</span></td><td>When GEMINI_API_KEY is set and service is running</td><td>FastAPI + Google Gemini + Sentence Transformers</td></tr>
+  <tr><td><span class="badge badge-orange">Built-in Fallback</span></td><td>When Python service is down or API key is missing</td><td>Node.js rule-based engine (aiFallbackService.js)</td></tr>
+</table>
+
+<h3>10.2 Feature 1: Resume Analysis</h3>
+<h4>How Skills Are Extracted:</h4>
+<pre><code><span class="cmt">// resumeExtractor.js</span>
+<span class="kw">const</span> KNOWN_SKILLS = [<span class="str">"javascript"</span>, <span class="str">"react"</span>, <span class="str">"node"</span>, <span class="str">"python"</span>, ...];
+<span class="kw">const</span> STANDARD_NAMES = { <span class="str">"react js"</span>: <span class="str">"React"</span>, <span class="str">"nodejs"</span>: <span class="str">"Node.js"</span>, ... };
+
+<span class="cmt">// 1. Extract text from PDF</span>
+<span class="kw">const</span> text = <span class="kw">await</span> extractTextFromResumeUrl(url); <span class="cmt">// Uses pdf-parse</span>
+
+<span class="cmt">// 2. Match against known skills dictionary</span>
+<span class="kw">const</span> skills = extractSkillsFromText(text); <span class="cmt">// Regex matching</span>
+
+<span class="cmt">// 3. Deduplicate: "react" + "react.js" + "reactjs" → "React"</span>
+<span class="kw">const</span> clean = formatCleanSkills(skills); <span class="cmt">// STANDARD_NAMES lookup</span></code></pre>
+
+<h3>10.3 Feature 2: Match Scoring</h3>
+<pre><code><span class="cmt">// How match % is calculated:</span>
+matchedSkills = candidateSkills ∩ jobRequirements
+missingSkills = jobRequirements - candidateSkills
+overallScore  = (matchedSkills.length / jobRequirements.length) × 100
+
+<span class="cmt">// Python AI service also adds semantic similarity:</span>
+<span class="cmt">// Uses sentence-transformers to compare resume text vs job description</span>
+<span class="cmt">// Overall = (skillScore × 0.55) + (semanticScore × 0.45)</span></code></pre>
+
+<h3>10.4 Feature 3: RAG Assistant</h3>
+<p><strong>RAG = Retrieval Augmented Generation</strong></p>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><strong>Retrieve:</strong> Gather all candidates' resumes, skills, match scores for this job</div></div>
+  <div class="step"><div class="num">2</div><div><strong>Augment:</strong> Inject this context into the Gemini prompt as grounding data</div></div>
+  <div class="step"><div class="num">3</div><div><strong>Generate:</strong> Gemini answers the recruiter's question using only the provided context</div></div>
+</div>
+
+<h3>10.5 Feature 5: Hiring Report Scoring</h3>
+<pre><code><span class="cmt">// Weighted score calculation (Python AI service)</span>
+<span class="kw">if</span> (hasInterview) {
+  overall = (skillScore × <span class="num">0.35</span>) + (semanticScore × <span class="num">0.30</span>) + (interviewScore × <span class="num">0.35</span>);
+} <span class="kw">else</span> {
+  overall = (skillScore × <span class="num">0.55</span>) + (semanticScore × <span class="num">0.45</span>);
+}</code></pre>
+
+<div class="qa-box">
+  <div class="q">🎯 Interview Q: What is the fallback strategy if the AI service is down?</div>
+  <div class="a"><strong>Answer:</strong> The <code>callAI()</code> helper in <code>ai.controller.js</code> uses a 60-second timeout with <code>AbortController</code>. If the Python service returns an error, times out, or is unreachable, it returns <code>null</code>. Every controller function checks for <code>null</code> and falls back to the local Node.js engine (<code>aiFallbackService.js</code>). This engine uses rule-based logic — skill matching uses set intersection, interview questions use templates, reports use weighted formulas — no API key needed.</div>
+</div>
+
+<!-- ==================== CHAPTER 11 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch11">Chapter 11: API Design & RESTful Patterns</h2>
+
+<h3>11.1 Complete API Reference</h3>
+<h4>User Endpoints — <code>/api/user</code></h4>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Purpose</th></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/register</td><td>No</td><td>Register + send OTP email</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/verify-otp</td><td>No</td><td>Verify OTP + auto-login</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/resend-otp</td><td>No</td><td>Resend OTP if expired/lost</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/forgot-password</td><td>No</td><td>Send password-reset OTP</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/reset-password</td><td>No</td><td>Reset password with OTP</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/login</td><td>No</td><td>Login + JWT cookie</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/logout</td><td>No</td><td>Clear JWT cookie</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/profile/update</td><td>Yes</td><td>Update profile + photo upload</td></tr>
+</table>
+
+<h4>Job Endpoints — <code>/api/job</code></h4>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Purpose</th></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/get?keyword=react</td><td>No</td><td>Search/list jobs (public)</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/get/:id</td><td>Optional</td><td>Job detail + isApplied flag</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/post</td><td>Recruiter</td><td>Create new job</td></tr>
+  <tr><td><span class="badge badge-orange">PUT</span></td><td>/update/:id</td><td>Recruiter (owner)</td><td>Edit job</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/getadminjobs</td><td>Recruiter</td><td>Get recruiter's posted jobs</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/recommendations/:id</td><td>No</td><td>AI-recommended similar jobs</td></tr>
+</table>
+
+<h4>Application Endpoints — <code>/api/application</code></h4>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Auth</th><th>Purpose</th></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/apply/:id</td><td>Student</td><td>Apply to job (duplicate check)</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/get</td><td>Student</td><td>My applied jobs</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/applicants/:id</td><td>Recruiter (owner)</td><td>All applicants for a job</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/status/:id/update</td><td>Recruiter (owner)</td><td>Accept/reject applicant</td></tr>
+</table>
+
+<h4>AI Endpoints — <code>/api/ai</code> (17 endpoints)</h4>
+<table>
+  <tr><th>Method</th><th>Endpoint</th><th>Feature</th></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/resume/upload</td><td>Upload PDF + extract skills</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/resume/analysis</td><td>Get cached resume analysis</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/match/job/:jobId</td><td>Student: match score for a job</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/match/candidates/:jobId</td><td>Recruiter: all candidates' match scores</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/assistant/chat</td><td>RAG assistant query</td></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>/assistant/history</td><td>Chat history</td></tr>
+  <tr><td><span class="badge badge-red">DELETE</span></td><td>/assistant/history</td><td>Clear chat history</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/interview/generate</td><td>Generate interview questions</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>/report/generate</td><td>Generate hiring report</td></tr>
+</table>
+
+<!-- ==================== CHAPTER 12 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch12">Chapter 12: End-to-End Data Flows</h2>
+
+<h3>Flow 1: User Registration (Full Trace)</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><code>Register.jsx</code>: User fills form → <code>FormData</code> with fields + profile photo file</div></div>
+  <div class="step"><div class="num">2</div><div><code>axios.post(USER_API_ENDPOINT/register, formData)</code> with <code>multipart/form-data</code></div></div>
+  <div class="step"><div class="num">3</div><div><code>user.route.js</code>: <code>router.post("/register", singleUpload, register)</code></div></div>
+  <div class="step"><div class="num">4</div><div><code>multer.js</code>: Extracts file from multipart → <code>req.file.buffer</code></div></div>
+  <div class="step"><div class="num">5</div><div><code>user.controller.js → register()</code>:</div></div>
+  <div class="step" style="margin-left:32px"><div class="num">a</div><div>If photo: <code>getDataUri(file)</code> → <code>cloudinary.uploader.upload()</code> → <code>profilePhotoUrl</code></div></div>
+  <div class="step" style="margin-left:32px"><div class="num">b</div><div><code>User.findOne({email})</code> — check duplicate</div></div>
+  <div class="step" style="margin-left:32px"><div class="num">c</div><div><code>bcrypt.hash(password, 10)</code> → <code>hashedPassword</code></div></div>
+  <div class="step" style="margin-left:32px"><div class="num">d</div><div><code>generateOtp()</code> → 6-digit string, <code>otpExpiry</code> = now + 10min</div></div>
+  <div class="step" style="margin-left:32px"><div class="num">e</div><div><code>new User({...}).save()</code> to MongoDB</div></div>
+  <div class="step" style="margin-left:32px"><div class="num">f</div><div><code>sendOtpEmail(email, otp)</code> via Nodemailer</div></div>
+  <div class="step"><div class="num">6</div><div>Response: <code>{message: "OTP sent", email, success: true}</code></div></div>
+  <div class="step"><div class="num">7</div><div><code>Register.jsx</code>: <code>navigate("/verify-otp", {state: {email}})</code></div></div>
+  <div class="step"><div class="num">8</div><div><code>VerifyOtp.jsx</code>: User enters OTP → <code>axios.post(/verify-otp, {email, otp})</code></div></div>
+  <div class="step"><div class="num">9</div><div>Backend: check OTP → set <code>isVerified: true</code> → create JWT → set cookie</div></div>
+  <div class="step"><div class="num">10</div><div>Frontend: <code>dispatch(setUser(user))</code> → <code>navigate("/")</code> → User is on homepage, logged in</div></div>
+</div>
+
+<h3>Flow 2: Applying to a Job</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><code>Description.jsx</code>: Student clicks "Apply Now"</div></div>
+  <div class="step"><div class="num">2</div><div><code>axios.post(APPLICATION_API_ENDPOINT/apply/${jobId}, {}, {withCredentials:true})</code></div></div>
+  <div class="step"><div class="num">3</div><div><code>isAuthenticated</code> middleware: extracts <code>userId</code> from JWT cookie</div></div>
+  <div class="step"><div class="num">4</div><div><code>applyJob()</code>: Check duplicate → <code>Application.create({job, applicant})</code> → push to <code>Job.applications[]</code></div></div>
+  <div class="step"><div class="num">5</div><div>Response: <code>{message: "Application submitted", success: true}</code></div></div>
+  <div class="step"><div class="num">6</div><div>Frontend: Button changes to "Already Applied" (disabled)</div></div>
+</div>
+
+<h3>Flow 3: AI Resume Upload</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><code>Profile.jsx</code>: Student selects PDF file</div></div>
+  <div class="step"><div class="num">2</div><div><code>axios.post(AI_API_ENDPOINT/resume/upload, formData)</code></div></div>
+  <div class="step"><div class="num">3</div><div>Backend: <code>multer</code> reads file → <code>cloudinary.upload()</code> → save URL to <code>user.profile.resumeFile</code></div></div>
+  <div class="step"><div class="num">4</div><div>Try Python AI service: <code>callAI("/extract-and-analyze", {pdf_base64})</code></div></div>
+  <div class="step"><div class="num">5</div><div>If Python fails → fallback: <code>extractTextFromResumeUrl()</code> + <code>extractSkillsFromText()</code></div></div>
+  <div class="step"><div class="num">6</div><div><code>formatCleanSkills()</code> → dedup "react", "reactjs", "React.js" → <code>["React"]</code></div></div>
+  <div class="step"><div class="num">7</div><div>Save cleaned skills to <code>user.profile.skills</code> AND <code>ResumeAnalysis</code> collection</div></div>
+  <div class="step"><div class="num">8</div><div>Frontend: Redux updates → Profile page shows extracted skills instantly</div></div>
+</div>
+
+<!-- ==================== CHAPTER 13 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch13">Chapter 13: Code Walkthrough — Key Files</h2>
+
+<h3>13.1 Backend: isAuthenticated.js (22 lines)</h3>
+<pre><code><span class="kw">import</span> jwt <span class="kw">from</span> <span class="str">"jsonwebtoken"</span>;
+
+<span class="kw">const</span> <span class="fn">authenticateToken</span> = (req, res, next) => {
+  <span class="kw">try</span> {
+    <span class="kw">const</span> token = req.cookies.token;   <span class="cmt">// 1. Read JWT from httpOnly cookie</span>
+    <span class="kw">if</span> (!token) {
+      <span class="kw">return</span> res.status(<span class="num">401</span>).json({ message: <span class="str">"No token provided"</span> });
+    }
+    <span class="kw">const</span> decoded = jwt.verify(token, process.env.JWT_SECRET); <span class="cmt">// 2. Verify</span>
+    req.id = decoded.userId;            <span class="cmt">// 3. Attach userId to request</span>
+    next();                              <span class="cmt">// 4. Pass to next middleware/controller</span>
+  } <span class="kw">catch</span> (error) {
+    <span class="kw">return</span> res.status(<span class="num">401</span>).json({ message: <span class="str">"Invalid token"</span> });
+  }
+};</code></pre>
+
+<h3>13.2 Frontend: Custom Hook Pattern</h3>
+<pre><code><span class="cmt">// This hook is called inside components like Jobs.jsx</span>
+<span class="cmt">// It auto-fetches when mounted or when searchedQuery changes</span>
+
+<span class="kw">const</span> <span class="fn">useGetAllJobs</span> = () => {
+  <span class="kw">const</span> dispatch = useDispatch();
+  <span class="kw">const</span> { searchedQuery } = useSelector(store => store.job);
+
+  useEffect(() => {
+    <span class="kw">const</span> fetchAllJobs = <span class="kw">async</span> () => {
+      <span class="kw">const</span> res = <span class="kw">await</span> axios.get(
+        <span class="str">`${JOB_API_ENDPOINT}/get?keyword=${searchedQuery}`</span>,
+        { withCredentials: <span class="num">true</span> }
+      );
+      <span class="kw">if</span> (res.data.status) {
+        dispatch(setAllJobs(res.data.jobs)); <span class="cmt">// Update Redux</span>
+      }
+    };
+    fetchAllJobs();
+  }, [dispatch, searchedQuery]); <span class="cmt">// Dependency array</span>
+};</code></pre>
+
+<h3>13.3 AI Service: callAI() with Timeout</h3>
+<pre><code><span class="kw">const</span> <span class="fn">callAI</span> = <span class="kw">async</span> (endpoint, body) => {
+  <span class="kw">const</span> controller = <span class="kw">new</span> AbortController();
+  <span class="kw">const</span> timeout = setTimeout(() => controller.abort(), <span class="num">60000</span>);
+
+  <span class="kw">try</span> {
+    <span class="kw">const</span> response = <span class="kw">await</span> fetch(<span class="str">`${AI_SERVICE_URL}${endpoint}`</span>, {
+      method: <span class="str">"POST"</span>,
+      headers: { <span class="str">"Content-Type"</span>: <span class="str">"application/json"</span> },
+      body: JSON.stringify(body),
+      signal: controller.signal,  <span class="cmt">// AbortController for timeout</span>
+    });
+    <span class="kw">return await</span> response.json();
+  } <span class="kw">catch</span> (error) {
+    <span class="kw">return null</span>;  <span class="cmt">// Caller falls back to local engine</span>
+  } <span class="kw">finally</span> {
+    clearTimeout(timeout);  <span class="cmt">// Prevent memory leak</span>
+  }
+};</code></pre>
+
+<!-- ==================== CHAPTER 14 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch14">Chapter 14: Technical Interview Q&A (50+ Questions)</h2>
+
+<h3>🔹 JavaScript / Node.js</h3>
+
+<div class="qa-box">
+  <div class="q">Q1: What is <code>"type": "module"</code> in package.json?</div>
+  <div class="a">It enables ES Module syntax (<code>import/export</code>) instead of CommonJS (<code>require/module.exports</code>). Without it, Node.js uses CommonJS by default. This project uses <code>import express from "express"</code> everywhere. Note: file extensions must be included in imports (<code>./utils/db.js</code>).</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q2: Explain <code>async/await</code> vs callbacks. Why does this project use async/await?</div>
+  <div class="a">Callbacks lead to "callback hell" (nested functions). Promises flatten the chain. <code>async/await</code> makes asynchronous code look synchronous. Every controller uses <code>async (req, res) => { try { await db.find() } catch { res.status(500) } }</code>. The <code>try/catch</code> handles both sync and async errors.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q3: What is the event loop? How does Express handle multiple requests?</div>
+  <div class="a">Node.js is single-threaded with an event loop. When a request hits an <code>await mongoose.find()</code>, the thread doesn't block — it delegates the I/O to the OS/libuv thread pool and processes other requests. When the DB responds, the callback is placed in the event queue and executed. This is why Node.js handles thousands of concurrent connections despite being single-threaded.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q4: What is middleware in Express? Name the types used in this project.</div>
+  <div class="a">(1) <strong>Application-level:</strong> <code>app.use(express.json())</code> — runs on every request. (2) <strong>Router-level:</strong> <code>router.post("/login", login)</code> — runs on specific routes. (3) <strong>Third-party:</strong> <code>cors()</code>, <code>cookieParser()</code>, <code>multer()</code>. (4) <strong>Custom:</strong> <code>isAuthenticated</code>, <code>optionalAuth</code>. Middleware executes in order via <code>next()</code>.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q5: What is CORS and why is it needed?</div>
+  <div class="a">Cross-Origin Resource Sharing. Browsers block requests from one origin (localhost:5173) to another (localhost:5011) by default (Same-Origin Policy). The backend must explicitly allow the frontend's origin. <code>cors({origin: ["http://localhost:5173"], credentials: true})</code> tells the browser: "This origin is allowed, and you may send cookies."</div>
+</div>
+
+<h3>🔹 React / Frontend</h3>
+
+<div class="qa-box">
+  <div class="q">Q6: Explain Virtual DOM.</div>
+  <div class="a">React maintains a lightweight copy of the real DOM in memory. When state changes, React creates a new Virtual DOM, diffs it against the old one (reconciliation), and only updates the changed DOM nodes (batch update). This is why React is fast — it minimizes expensive real DOM operations.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q7: What are React hooks? Which ones does this project use?</div>
+  <div class="a"><code>useState</code> — local state (form inputs in Login.jsx). <code>useEffect</code> — side effects (data fetching in custom hooks). <code>useNavigate</code> — programmatic routing. <code>useParams</code> — read URL params (jobId). <code>useSelector</code> — read Redux state. <code>useDispatch</code> — dispatch Redux actions.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q8: What is the purpose of <code>useEffect</code>'s dependency array?</div>
+  <div class="a"><code>[]</code> — runs once on mount (like componentDidMount). <code>[searchedQuery]</code> — runs when <code>searchedQuery</code> changes. No array — runs on every render (usually a bug). In <code>useGetAllJobs</code>, the dependency is <code>[searchedQuery]</code> — so it re-fetches jobs whenever the user searches something new.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q9: Why use <code>createBrowserRouter</code> instead of <code>&lt;BrowserRouter&gt;</code>?</div>
+  <div class="a"><code>createBrowserRouter</code> (React Router v6.4+) is the data API router. It supports loaders, actions, and error elements. It's defined as a configuration object (array of routes), making it easier to reason about all routes in one place (App.jsx).</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q10: What is Tailwind CSS and why use it instead of regular CSS?</div>
+  <div class="a">Utility-first CSS: <code>className="bg-blue-500 p-4 rounded-lg text-white"</code>. No naming CSS classes. No switching between CSS and JSX files. Consistent design system via config. Purges unused classes in production (tiny CSS bundle). The tradeoff: long class strings in JSX.</div>
+</div>
+
+<h3>🔹 MongoDB / Database</h3>
+
+<div class="qa-box">
+  <div class="q">Q11: MongoDB vs SQL — when to use which?</div>
+  <div class="a">MongoDB: flexible schemas, nested documents, rapid iteration, JavaScript-native. Good for: social media profiles, content management, real-time apps. SQL: strict schemas, complex JOINs, transactions, data integrity. Good for: banking, inventory, relationships-heavy data. This project uses MongoDB because user profiles have varying fields and the schema evolves during development.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q12: What is <code>.populate()</code> and what SQL operation is it equivalent to?</div>
+  <div class="a"><code>.populate("company")</code> replaces the <code>ObjectId</code> reference with the actual document from the referenced collection. It's equivalent to SQL <code>LEFT JOIN</code>. Under the hood, Mongoose fires a second query: <code>Company.find({_id: {$in: [id1, id2]}})</code>. Deep populate: <code>.populate({path: "applications", populate: {path: "applicant"}})</code> is like a multi-table JOIN.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q13: What does <code>{timestamps: true}</code> do in Mongoose?</div>
+  <div class="a">Automatically adds <code>createdAt</code> and <code>updatedAt</code> fields to every document. Mongoose manages them — <code>createdAt</code> is set on insert, <code>updatedAt</code> on every <code>.save()</code> or <code>findOneAndUpdate()</code>. Useful for sorting (newest first) and auditing.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q14: Explain the <code>$regex</code> query used in job search.</div>
+  <div class="a"><code>Job.find({title: {$regex: keyword, $options: "i"}})</code> — performs case-insensitive substring search. <code>"i"</code> flag = case insensitive. <code>$or</code> searches both title AND description. This is simpler than full-text search but less performant on large datasets (no index). For production, you'd use MongoDB Atlas Search or Elasticsearch.</div>
+</div>
+
+<h3>🔹 Authentication & Security</h3>
+
+<div class="qa-box">
+  <div class="q">Q15: JWT vs Session-based auth — what's the difference?</div>
+  <div class="a"><strong>JWT (this project):</strong> Stateless. Token contains user data. Server doesn't store sessions. Scales horizontally. <strong>Sessions:</strong> Stateful. Session ID stored server-side (Redis/DB). More control (can revoke instantly). JWT tradeoff: can't revoke before expiry. This project uses 1-day expiry as mitigation.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q16: What is CSRF and how does this project prevent it?</div>
+  <div class="a">Cross-Site Request Forgery: attacker crafts a malicious page that sends a request to your backend (which auto-includes the victim's cookies). <code>sameSite: "Strict"</code> on the JWT cookie prevents this — the cookie is NOT sent on cross-origin requests (e.g., from evil-site.com to localhost:5011).</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q17: What is XSS and how does httpOnly prevent it?</div>
+  <div class="a">Cross-Site Scripting: attacker injects JavaScript into the page. If JWT is in localStorage, the injected script reads it with <code>localStorage.getItem("token")</code>. With <code>httpOnly: true</code>, JavaScript cannot access the cookie at all — only the browser can send it in HTTP headers.</div>
+</div>
+
+<h3>🔹 AI / ML Features</h3>
+
+<div class="qa-box">
+  <div class="q">Q18: What is RAG (Retrieval Augmented Generation)?</div>
+  <div class="a">RAG combines information retrieval with text generation. Instead of asking the LLM to "remember" facts, you retrieve relevant data (candidate resumes, skills, match scores) and inject it into the prompt. The LLM generates answers grounded in this context. This prevents hallucination and ensures answers are based on actual data.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q19: What is semantic similarity and how is it used for matching?</div>
+  <div class="a">Semantic similarity measures how close two texts are in meaning (not just exact keyword match). <code>sentence-transformers</code> converts text to high-dimensional vectors (embeddings). Cosine similarity between resume embedding and job description embedding gives a 0-100% score. This catches synonyms: "frontend developer" matches "UI engineer" even though the words are different.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q20: How does the skill deduplication work?</div>
+  <div class="a"><code>formatCleanSkills()</code> normalizes each skill: lowercase, remove dots/hyphens, trim whitespace. Then looks up <code>STANDARD_SKILL_NAMES</code> map: "react js" → "React", "nodejs" → "Node.js". Uses a <code>Set</code> (dedupKey = lowercase alphanumeric only) to ensure "React", "react.js", "ReactJS" all become one "React" entry.</div>
+</div>
+
+<h3>🔹 System Design Questions</h3>
+
+<div class="qa-box">
+  <div class="q">Q21: How would you scale this for 1 million users?</div>
+  <div class="a">(1) <strong>Database:</strong> MongoDB Atlas with sharding. Add indexes on frequently queried fields (email, job.title). (2) <strong>Backend:</strong> Horizontal scaling with PM2 cluster mode or Docker + load balancer. (3) <strong>Caching:</strong> Redis for job listings, session data. (4) <strong>Search:</strong> Replace <code>$regex</code> with Elasticsearch or MongoDB Atlas Search. (5) <strong>File uploads:</strong> Queue-based processing with Bull/BullMQ. (6) <strong>AI Service:</strong> Auto-scaling with Kubernetes. Model caching to avoid reloading. (7) <strong>CDN:</strong> Serve frontend from CloudFront/Vercel.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q22: What are the single points of failure?</div>
+  <div class="a">(1) MongoDB — mitigate with replica sets. (2) AI Service — mitigated with built-in fallback engine. (3) Cloudinary — no fallback; could add S3 backup. (4) Gmail SMTP — mitigated with dev mode console fallback. (5) Single backend server — mitigate with multiple instances + load balancer.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q23: How would you add real-time notifications?</div>
+  <div class="a">Use <strong>WebSockets</strong> (Socket.io). When recruiter accepts/rejects, emit event to the applicant's socket room. Frontend listens and shows toast notification. Alternative: Server-Sent Events (SSE) for one-way server → client updates.</div>
+</div>
+
+<!-- ==================== CHAPTER 15 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch15">Chapter 15: HR & Behavioral Interview Q&A</h2>
+
+<div class="hr-box">
+  <div class="q">Q1: Tell me about the project you've built.</div>
+  <div class="a">"I built an AI-powered job portal using the MERN stack. It has two user roles — students can browse and apply for jobs, while recruiters can post jobs and manage applicants. The unique part is the AI integration: we use Google Gemini to analyze resumes, calculate match scores, generate interview questions, and produce hiring reports. The architecture is a 3-service design — React frontend, Express backend, and a Python FastAPI microservice for AI features. We used JWT in httpOnly cookies for security, Cloudinary for file uploads, and email OTP verification for account security."</div>
+</div>
+
+<div class="hr-box">
+  <div class="q">Q2: What was the most challenging part?</div>
+  <div class="a">"Designing the AI fallback system. We needed the app to work even when the Python AI service or Gemini API is unavailable. I implemented a dual-engine architecture: the backend first tries the Python service, and if it fails (timeout, error, or no API key), it falls back to a local rule-based engine in Node.js. This required careful error handling with <code>AbortController</code> for timeouts and graceful degradation. The skill deduplication was also tricky — normalizing 'React.js', 'ReactJS', 'react', 'React' into one clean entry required a standardization dictionary."</div>
+</div>
+
+<div class="hr-box">
+  <div class="q">Q3: What was your role in the team?</div>
+  <div class="a">"I worked on [specify your actual contribution — backend API development / frontend components / AI integration / database design]. I was responsible for designing the [specific part], implementing the [specific feature], and ensuring the [specific aspect] worked correctly across the full stack."</div>
+</div>
+
+<div class="hr-box">
+  <div class="q">Q4: How did you manage version control and collaboration?</div>
+  <div class="a">"We used Git with GitHub. The <code>main</code> branch was our production branch. We followed feature branching — each team member worked on feature branches and created pull requests for code review before merging. We kept <code>.env</code> files in <code>.gitignore</code> and shared an <code>example.env</code> template with placeholder values."</div>
+</div>
+
+<div class="hr-box">
+  <div class="q">Q5: What would you improve if you had more time?</div>
+  <div class="a">"(1) Add <strong>WebSocket notifications</strong> for real-time status updates. (2) Implement <strong>rate limiting</strong> on auth endpoints to prevent brute force. (3) Add <strong>pagination</strong> to job listings instead of loading all jobs. (4) Write <strong>unit and integration tests</strong> with Jest. (5) Add <strong>image optimization</strong> (compress before Cloudinary upload). (6) Implement <strong>Redis caching</strong> for frequently accessed job listings. (7) Add a <strong>search index</strong> for better job search instead of regex."</div>
+</div>
+
+<div class="hr-box">
+  <div class="q">Q6: How do you handle conflicts in a team?</div>
+  <div class="a">"When we had disagreements on technical approach — like whether to use localStorage or cookies for JWT — we discussed the tradeoffs objectively. I presented the security implications of each approach with examples (XSS for localStorage, CSRF for cookies). We chose httpOnly cookies with sameSite:Strict based on the analysis, not personal preference. Data-driven decisions eliminate conflict."</div>
+</div>
+
+<div class="hr-box">
+  <div class="q">Q7: How do you learn new technologies?</div>
+  <div class="a">"For this project, I needed to learn Gemini API, FastAPI, and sentence-transformers. I started with official documentation, built small proof-of-concept scripts, then integrated into the project. For example, before writing the RAG assistant, I first tested Gemini prompts in Google AI Studio, then built a standalone Python script, and finally integrated it with the backend via HTTP."</div>
+</div>
+
+<!-- ==================== CHAPTER 16 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch16">Chapter 16: System Design & Scalability</h2>
+
+<h3>16.1 Production Deployment Architecture</h3>
+<div class="flow-box">
+  <div class="step"><div class="num">1</div><div><strong>Frontend:</strong> <code>npm run build</code> → Serve from Express static middleware OR deploy to Vercel/Netlify</div></div>
+  <div class="step"><div class="num">2</div><div><strong>Backend:</strong> Deploy to AWS EC2 / Railway / Render with PM2 process manager</div></div>
+  <div class="step"><div class="num">3</div><div><strong>Database:</strong> MongoDB Atlas (managed cloud) with automatic backups and replica sets</div></div>
+  <div class="step"><div class="num">4</div><div><strong>AI Service:</strong> Deploy to separate container (Docker) with GPU access if available</div></div>
+</div>
+
+<p>The project's <code>index.js</code> already supports production mode:</p>
+<pre><code><span class="kw">if</span> (process.env.NODE_ENV === <span class="str">"production"</span>) {
+  app.use(express.static(<span class="str">'./Frontend/dist'</span>));  <span class="cmt">// Serve React build</span>
+  app.get(<span class="str">'*'</span>, (req, res) => res.sendFile(<span class="str">'index.html'</span>)); <span class="cmt">// SPA fallback</span>
+}</code></pre>
+
+<h3>16.2 Environment Variable Strategy</h3>
+<table>
+  <tr><th>File</th><th>Variables</th><th>Purpose</th></tr>
+  <tr><td>Backend/.env</td><td>MONGO_URI, JWT_SECRET, CLOUD_*, EMAIL_*, GEMINI_*</td><td>Server secrets — never committed to Git</td></tr>
+  <tr><td>Frontend/.env</td><td>VITE_API_BASE_URL</td><td>API base URL — empty string for production (same origin)</td></tr>
+  <tr><td>ai-service/.env</td><td>GEMINI_API_KEY, GEMINI_MODEL, PORT</td><td>AI service config</td></tr>
+</table>
+
+<h3>16.3 Error Handling Strategy</h3>
+<pre><code><span class="cmt">// Every controller follows this pattern:</span>
+<span class="kw">export const</span> someFunction = <span class="kw">async</span> (req, res) => {
+  <span class="kw">try</span> {
+    <span class="cmt">// 1. Validate input</span>
+    <span class="kw">if</span> (!input) <span class="kw">return</span> res.status(<span class="num">400</span>).json({message, success: <span class="num">false</span>});
+    
+    <span class="cmt">// 2. Business logic</span>
+    <span class="kw">const</span> result = <span class="kw">await</span> Model.find(query);
+    <span class="kw">if</span> (!result) <span class="kw">return</span> res.status(<span class="num">404</span>).json({message, success: <span class="num">false</span>});
+    
+    <span class="cmt">// 3. Authorization check</span>
+    <span class="kw">if</span> (result.owner !== req.id) <span class="kw">return</span> res.status(<span class="num">403</span>).json({...});
+    
+    <span class="cmt">// 4. Success response</span>
+    <span class="kw">return</span> res.status(<span class="num">200</span>).json({data, success: <span class="num">true</span>});
+    
+  } <span class="kw">catch</span> (error) {
+    console.error(error);
+    res.status(<span class="num">500</span>).json({message: <span class="str">"Server Error"</span>, success: <span class="num">false</span>});
+  }
+};</code></pre>
+
+<h3>16.4 HTTP Status Codes Used</h3>
+<table>
+  <tr><th>Code</th><th>Meaning</th><th>When Used</th></tr>
+  <tr><td><span class="badge badge-green">200</span></td><td>OK</td><td>Successful GET, PUT, POST operations</td></tr>
+  <tr><td><span class="badge badge-green">201</span></td><td>Created</td><td>Successful resource creation (new job, application, company)</td></tr>
+  <tr><td><span class="badge badge-orange">400</span></td><td>Bad Request</td><td>Missing fields, invalid input, duplicate email</td></tr>
+  <tr><td><span class="badge badge-orange">401</span></td><td>Unauthorized</td><td>No JWT token or invalid/expired token</td></tr>
+  <tr><td><span class="badge badge-orange">403</span></td><td>Forbidden</td><td>Wrong role, not owner of resource, unverified email</td></tr>
+  <tr><td><span class="badge badge-orange">404</span></td><td>Not Found</td><td>User/job/company doesn't exist</td></tr>
+  <tr><td><span class="badge badge-red">500</span></td><td>Server Error</td><td>Unhandled exceptions, database errors</td></tr>
+</table>
+
+<!-- ==================== QUICK REFERENCE ==================== -->
+<div class="page-break"></div>
+<h2>Quick Reference — File Index</h2>
+
+<h3>Backend (13 files)</h3>
+<table>
+  <tr><th>File</th><th>Lines</th><th>Purpose</th></tr>
+  <tr><td>index.js</td><td>60</td><td>Express entry point, middleware setup, route mounting</td></tr>
+  <tr><td>controllers/user.controller.js</td><td>456</td><td>Register, login, OTP, profile update</td></tr>
+  <tr><td>controllers/job.controller.js</td><td>280</td><td>CRUD jobs, search, AI recommendations</td></tr>
+  <tr><td>controllers/company.controller.js</td><td>123</td><td>CRUD companies, logo upload</td></tr>
+  <tr><td>controllers/application.controller.js</td><td>140</td><td>Apply, view applicants, accept/reject</td></tr>
+  <tr><td>controllers/ai.controller.js</td><td>1203</td><td>All 5 AI features (largest file)</td></tr>
+  <tr><td>middleware/isAuthenticated.js</td><td>22</td><td>JWT verification</td></tr>
+  <tr><td>middleware/optionalAuth.js</td><td>25</td><td>Non-blocking JWT check</td></tr>
+  <tr><td>middleware/multer.js</td><td>5</td><td>File upload config</td></tr>
+  <tr><td>utils/db.js</td><td>15</td><td>MongoDB connection</td></tr>
+  <tr><td>utils/cloud.js</td><td>13</td><td>Cloudinary config</td></tr>
+  <tr><td>utils/mailer.js</td><td>70</td><td>OTP email sending</td></tr>
+  <tr><td>utils/resumeExtractor.js</td><td>361</td><td>PDF parsing, skill extraction</td></tr>
+</table>
+
+<h3>Frontend Key Files</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>main.jsx</td><td>App bootstrap with Redux Provider + PersistGate</td></tr>
+  <tr><td>App.jsx</td><td>All routes defined with createBrowserRouter</td></tr>
+  <tr><td>redux/store.js</td><td>Redux store with persist + RESET_STORE</td></tr>
+  <tr><td>redux/authSlice.js</td><td>user + loading state</td></tr>
+  <tr><td>redux/jobSlice.js</td><td>Jobs, saved jobs, search state</td></tr>
+  <tr><td>utils/data.js</td><td>API endpoint constants</td></tr>
+  <tr><td>hooks/useGetAllJobs.jsx</td><td>Custom hook for job fetching</td></tr>
+</table>
+
+<!-- ==================== CHAPTER 17 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch17">Chapter 17: Advanced React — Deep Interview Questions</h2>
+
+<h3>17.1 Reconciliation & Fiber Architecture</h3>
+<div class="qa-box">
+  <div class="q">Q: Explain React's reconciliation algorithm.</div>
+  <div class="a"><strong>Answer:</strong> When state changes, React builds a new Virtual DOM tree. It then <strong>diffs</strong> the new tree against the old one using two heuristics: (1) Elements of different types produce different trees — React tears down the old tree and builds a new one. (2) Elements with stable <code>key</code> props can be matched across renders. This reduces the O(n³) DOM diffing problem to O(n). React then batch-applies only the minimal set of real DOM mutations. <strong>React Fiber</strong> (React 16+) made this interruptible — React can pause rendering work to handle higher-priority updates like user input.</div>
+</div>
+
+<h3>17.2 Performance Hooks</h3>
+<table>
+  <tr><th>Hook</th><th>What It Does</th><th>When to Use</th><th>Project Relevance</th></tr>
+  <tr><td><code>useMemo</code></td><td>Memoizes a computed value</td><td>Expensive calculations that shouldn't re-run on every render</td><td>Could memoize filtered job lists: <code>useMemo(() => jobs.filter(...), [jobs, filter])</code></td></tr>
+  <tr><td><code>useCallback</code></td><td>Memoizes a function reference</td><td>When passing callbacks to child components that use <code>React.memo</code></td><td>Could wrap <code>changeEventHandler</code> in Login.jsx to prevent child re-renders</td></tr>
+  <tr><td><code>React.memo</code></td><td>Skips re-render if props unchanged</td><td>Pure presentational components that receive the same props</td><td>Job card components — if job data hasn't changed, skip re-render</td></tr>
+  <tr><td><code>React.lazy</code></td><td>Code-splits a component</td><td>Large components not needed on initial load</td><td>AI modals (AIReportModal, AIInterviewModal) — loaded only when recruiter clicks</td></tr>
+</table>
+
+<div class="qa-box">
+  <div class="q">Q: When should you NOT use useMemo/useCallback?</div>
+  <div class="a"><strong>Answer:</strong> When the computation is cheap (simple string concatenation, basic math). Memoization itself has a cost — React must store the previous value and compare dependencies on every render. If the memoized value changes every render anyway (new object/array in deps), it's pure overhead. Rule: <strong>profile first, optimize later</strong>. This project doesn't use them because for this scale, the overhead isn't noticeable.</div>
+</div>
+
+<h3>17.3 Context API vs Redux</h3>
+<div class="qa-box">
+  <div class="q">Q: Why does this project use Redux instead of Context API?</div>
+  <div class="a"><strong>Answer:</strong> (1) <strong>Performance:</strong> Context re-renders ALL consumers when the context value changes. Redux uses <code>useSelector</code> with shallow equality checks — only components reading the changed slice re-render. (2) <strong>DevTools:</strong> Redux DevTools show action history, state diffs, time-travel debugging. (3) <strong>Middleware:</strong> Redux supports middleware (thunks, sagas) for async flows. (4) <strong>Persistence:</strong> <code>redux-persist</code> integrates seamlessly. For a project with 5 state slices and complex cross-component state (auth, jobs, applications, companies, AI), Redux is the right choice. Context works for simpler state like theme/locale.</div>
+</div>
+
+<h3>17.4 Error Boundaries</h3>
+<div class="qa-box">
+  <div class="q">Q: What are Error Boundaries? Does this project use them?</div>
+  <div class="a"><strong>Answer:</strong> Error Boundaries are class components that catch JavaScript errors in their child component tree, log them, and show a fallback UI instead of crashing the whole app. They catch rendering errors, lifecycle errors, and constructor errors. They do NOT catch: event handler errors, async errors, SSR errors. This project does <strong>not</strong> use them — adding one would improve UX. You'd wrap <code>&lt;App/&gt;</code> with an ErrorBoundary that shows "Something went wrong" instead of a white screen.</div>
+</div>
+
+<h3>17.5 Suspense & Lazy Loading</h3>
+<pre><code><span class="cmt">// How to add lazy loading to this project:</span>
+<span class="kw">import</span> { lazy, Suspense } <span class="kw">from</span> <span class="str">"react"</span>;
+
+<span class="cmt">// Instead of: import AIReportModal from "./AIReportModal";</span>
+<span class="kw">const</span> AIReportModal = lazy(() => <span class="kw">import</span>(<span class="str">"./AIReportModal"</span>));
+
+<span class="cmt">// In JSX:</span>
+&lt;Suspense fallback={&lt;Spinner /&gt;}&gt;
+  &lt;AIReportModal /&gt;
+&lt;/Suspense&gt;</code></pre>
+<p>This splits <code>AIReportModal</code> into a separate JS bundle. It's only downloaded when the component is first rendered — reducing initial page load.</p>
+
+<h3>17.6 Controlled vs Uncontrolled Components</h3>
+<div class="qa-box">
+  <div class="q">Q: What's the difference? Which does this project use?</div>
+  <div class="a"><strong>Controlled:</strong> React state drives the input value. <code>&lt;Input value={input.email} onChange={handler} /&gt;</code>. React is the "single source of truth." Used throughout this project (Login, Register, PostJob). <strong>Uncontrolled:</strong> DOM holds the value. Access via <code>useRef</code>. <code>&lt;input ref={inputRef} /&gt;</code>, read with <code>inputRef.current.value</code>. Simpler but less control. This project uses <strong>controlled components</strong> everywhere for validation and state management.</div>
+</div>
+
+<!-- ==================== CHAPTER 18 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch18">Chapter 18: Node.js Internals — Under the Hood</h2>
+
+<h3>18.1 Event Loop — The 6 Phases</h3>
+<pre><code><span class="cmt">// Node.js Event Loop Phases (in order):</span>
+
+┌───────────────────────────┐
+│    <span class="fn">1. Timers</span>              │  setTimeout(), setInterval() callbacks
+├───────────────────────────┤
+│    <span class="fn">2. Pending Callbacks</span>   │  I/O callbacks deferred from previous cycle
+├───────────────────────────┤
+│    <span class="fn">3. Idle/Prepare</span>       │  Internal use only
+├───────────────────────────┤
+│    <span class="fn">4. Poll</span>               │  Retrieve new I/O events (DB queries, file reads)
+│                           │  ← <span class="str">Most time is spent here</span>
+├───────────────────────────┤
+│    <span class="fn">5. Check</span>              │  setImmediate() callbacks
+├───────────────────────────┤
+│    <span class="fn">6. Close Callbacks</span>    │  socket.on('close') etc.
+└───────────────────────────┘
+
+<span class="cmt">// Between each phase: process.nextTick() and Promise microtasks</span></code></pre>
+
+<div class="qa-box">
+  <div class="q">Q: What's the difference between <code>process.nextTick()</code> and <code>setImmediate()</code>?</div>
+  <div class="a"><strong><code>process.nextTick()</code>:</strong> Fires BEFORE the event loop continues to the next phase. It's a microtask — it has highest priority. <strong><code>setImmediate()</code>:</strong> Fires in the Check phase — after I/O events. <strong>Promise <code>.then()</code>:</strong> Also a microtask, fires after <code>nextTick</code>. Order: <code>nextTick</code> → Promise → <code>setImmediate</code> → <code>setTimeout</code>.</div>
+</div>
+
+<h3>18.2 How Express Handles 10,000 Concurrent Requests</h3>
+<div class="qa-box">
+  <div class="q">Q: Node.js is single-threaded. How can this backend handle thousands of users?</div>
+  <div class="a"><strong>Answer:</strong> The single thread only handles JavaScript execution. All I/O (MongoDB queries, Cloudinary uploads, HTTP calls to AI service) is delegated to the <strong>libuv thread pool</strong> (default: 4 threads) or the OS kernel (epoll/kqueue). When <code>await User.findOne({email})</code> runs, the thread is FREE to handle other requests. When MongoDB responds, the callback enters the event queue. This non-blocking I/O model lets a single Node.js process handle 10K+ concurrent connections. CPU-intensive tasks (bcrypt hashing) DO block — that's why bcrypt uses a native C++ addon with its own threads.</div>
+</div>
+
+<h3>18.3 Streams</h3>
+<div class="qa-box">
+  <div class="q">Q: What are Node.js streams? Where could they be used in this project?</div>
+  <div class="a"><strong>Answer:</strong> Streams process data in chunks instead of loading everything into memory. 4 types: <strong>Readable</strong> (fs.createReadStream), <strong>Writable</strong> (fs.createWriteStream), <strong>Duplex</strong> (TCP socket), <strong>Transform</strong> (zlib compression). In this project, the resume upload currently loads the entire PDF into memory (<code>memoryStorage</code>). For large files, you'd use a <strong>stream</strong>: pipe the upload directly to Cloudinary without buffering the whole file in RAM. Also, the PDF text extraction could use streaming to handle multi-hundred-page resumes.</div>
+</div>
+
+<h3>18.4 Clustering</h3>
+<pre><code><span class="cmt">// How to scale this backend to use all CPU cores:</span>
+<span class="kw">import</span> cluster <span class="kw">from</span> <span class="str">"cluster"</span>;
+<span class="kw">import</span> os <span class="kw">from</span> <span class="str">"os"</span>;
+
+<span class="kw">if</span> (cluster.isPrimary) {
+  <span class="kw">const</span> cpus = os.cpus().length; <span class="cmt">// e.g., 8 cores</span>
+  <span class="kw">for</span> (<span class="kw">let</span> i = <span class="num">0</span>; i < cpus; i++) {
+    cluster.fork();  <span class="cmt">// Create worker process</span>
+  }
+} <span class="kw">else</span> {
+  app.listen(<span class="num">5011</span>); <span class="cmt">// Each worker listens on same port</span>
+}
+<span class="cmt">// Or use PM2: pm2 start index.js -i max</span></code></pre>
+
+<div class="qa-box">
+  <div class="q">Q: What is <code>PM2</code> and why would you use it in production?</div>
+  <div class="a"><strong>Answer:</strong> PM2 is a production process manager. It provides: (1) <strong>Cluster mode</strong> — runs multiple instances across all CPU cores. (2) <strong>Auto-restart</strong> — restarts if the process crashes. (3) <strong>Zero-downtime reload</strong> — <code>pm2 reload</code> restarts workers one by one. (4) <strong>Log management</strong> — centralized logs. (5) <strong>Monitoring</strong> — CPU/memory dashboards. This project uses <code>nodemon</code> for development; PM2 replaces it in production.</div>
+</div>
+
+<!-- ==================== CHAPTER 19 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch19">Chapter 19: MongoDB Advanced</h2>
+
+<h3>19.1 Indexing — The #1 Performance Topic</h3>
+<div class="qa-box">
+  <div class="q">Q: What indexes should this project have? Why?</div>
+  <div class="a"><strong>Answer:</strong> Currently, MongoDB auto-creates indexes on <code>_id</code> fields and any field with <code>unique: true</code> (email, phoneNumber, company name). But for performance, you should add:
+  <br><br>
+  <code>Job.createIndex({title: "text", description: "text"})</code> — text index for full-text search instead of <code>$regex</code><br>
+  <code>Application.createIndex({job: 1, applicant: 1}, {unique: true})</code> — compound unique index preventing duplicate applications (currently checked in code)<br>
+  <code>Job.createIndex({created_by: 1})</code> — fast lookup for recruiter's jobs (<code>getAdminJobs</code>)<br>
+  <code>ResumeAnalysis.createIndex({user: 1}, {unique: true})</code> — fast lookup for user's analysis
+  <br><br>
+  Without indexes, MongoDB does a <strong>collection scan</strong> (reads every document). With indexes, it does an <strong>index scan</strong> (B-tree lookup, O(log n)).</div>
+</div>
+
+<h3>19.2 Aggregation Pipeline</h3>
+<div class="qa-box">
+  <div class="q">Q: What is the aggregation pipeline? Give an example for this project.</div>
+  <div class="a"><strong>Answer:</strong> Aggregation pipeline processes documents through stages: <code>$match</code> (filter), <code>$group</code> (aggregate), <code>$sort</code>, <code>$project</code> (reshape), <code>$lookup</code> (join), <code>$unwind</code> (flatten arrays). Example — get the number of applicants per job for a recruiter:</div>
+</div>
+<pre><code>Job.aggregate([
+  { <span class="str">$match</span>: { created_by: recruiterId } },      <span class="cmt">// Filter recruiter's jobs</span>
+  { <span class="str">$lookup</span>: {                                    <span class="cmt">// JOIN with applications</span>
+    from: <span class="str">"applications"</span>,
+    localField: <span class="str">"_id"</span>,
+    foreignField: <span class="str">"job"</span>,
+    as: <span class="str">"apps"</span>
+  }},
+  { <span class="str">$project</span>: {                                   <span class="cmt">// Reshape output</span>
+    title: <span class="num">1</span>,
+    applicantCount: { <span class="str">$size</span>: <span class="str">"$apps"</span> },
+    acceptedCount: {
+      <span class="str">$size</span>: { <span class="str">$filter</span>: { input: <span class="str">"$apps"</span>, cond: { <span class="str">$eq</span>: [<span class="str">"$$this.status"</span>, <span class="str">"accepted"</span>] }}}
+    }
+  }},
+  { <span class="str">$sort</span>: { applicantCount: <span class="num">-1</span> } }              <span class="cmt">// Most applicants first</span>
+]);</code></pre>
+
+<h3>19.3 $lookup vs .populate()</h3>
+<table>
+  <tr><th>Feature</th><th><code>.populate()</code> (Mongoose)</th><th><code>$lookup</code> (MongoDB)</th></tr>
+  <tr><td>Where it runs</td><td>Application layer (Node.js)</td><td>Database layer (MongoDB server)</td></tr>
+  <tr><td>How it works</td><td>Fires additional queries</td><td>Single aggregation pipeline</td></tr>
+  <tr><td>Performance</td><td>Multiple round trips to DB</td><td>Single round trip</td></tr>
+  <tr><td>When to use</td><td>Simple lookups, small datasets</td><td>Complex queries, large datasets, analytics</td></tr>
+  <tr><td>This project uses</td><td><code>.populate()</code> everywhere</td><td>Not used (could optimize)</td></tr>
+</table>
+
+<h3>19.4 Transactions</h3>
+<div class="qa-box">
+  <div class="q">Q: What are MongoDB transactions? Where should this project use them?</div>
+  <div class="a"><strong>Answer:</strong> Transactions ensure multiple operations are atomic (all succeed or all fail). In this project, <code>applyJob()</code> does TWO writes: (1) Create Application (2) Push applicationId to Job.applications[]. If step 2 fails, you have an orphan application. With a transaction:
+  <pre><code><span class="kw">const</span> session = <span class="kw">await</span> mongoose.startSession();
+session.startTransaction();
+<span class="kw">try</span> {
+  <span class="kw">const</span> app = <span class="kw">await</span> Application.create([{...}], {session});
+  <span class="kw">await</span> Job.updateOne({_id: jobId}, {$push: {applications: app._id}}, {session});
+  <span class="kw">await</span> session.commitTransaction();
+} <span class="kw">catch</span> (e) {
+  <span class="kw">await</span> session.abortTransaction(); <span class="cmt">// Both writes rolled back</span>
+}</code></pre>
+  Requires MongoDB replica set (MongoDB Atlas has this by default).</div>
+</div>
+
+<!-- ==================== CHAPTER 20 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch20">Chapter 20: Performance Optimization</h2>
+
+<h3>20.1 Frontend Performance</h3>
+<table>
+  <tr><th>Technique</th><th>What It Does</th><th>How to Apply to This Project</th></tr>
+  <tr><td><strong>Debouncing</strong></td><td>Delays execution until user stops typing</td><td>Job search fires API call on every keystroke. Debounce with 300ms delay: only call API after user stops typing for 300ms.</td></tr>
+  <tr><td><strong>Code Splitting</strong></td><td>Split JS into smaller chunks loaded on demand</td><td><code>React.lazy()</code> for AI modals, admin pages. Users who never visit admin don't download admin code.</td></tr>
+  <tr><td><strong>Image Optimization</strong></td><td>Resize/compress images before upload</td><td>Profile photos uploaded at full resolution. Compress to 200x200px before Cloudinary upload.</td></tr>
+  <tr><td><strong>Pagination</strong></td><td>Load data in pages, not all at once</td><td><code>GET /api/job/get?page=1&limit=20</code> instead of loading all jobs.</td></tr>
+  <tr><td><strong>Virtualization</strong></td><td>Only render visible list items</td><td>For long job lists, use <code>react-window</code> to render only visible rows.</td></tr>
+</table>
+
+<h3>20.2 Debouncing Code Example</h3>
+<pre><code><span class="cmt">// Custom debounce hook for job search:</span>
+<span class="kw">const</span> <span class="fn">useDebounce</span> = (value, delay = <span class="num">300</span>) => {
+  <span class="kw">const</span> [debounced, setDebounced] = useState(value);
+  
+  useEffect(() => {
+    <span class="kw">const</span> timer = setTimeout(() => setDebounced(value), delay);
+    <span class="kw">return</span> () => clearTimeout(timer); <span class="cmt">// Cleanup on value change</span>
+  }, [value, delay]);
+  
+  <span class="kw">return</span> debounced;
+};
+
+<span class="cmt">// Usage in search:</span>
+<span class="kw">const</span> [search, setSearch] = useState(<span class="str">""</span>);
+<span class="kw">const</span> debouncedSearch = useDebounce(search, <span class="num">300</span>);
+
+useEffect(() => {
+  dispatch(setSearchedQuery(debouncedSearch)); <span class="cmt">// Only fires after 300ms idle</span>
+}, [debouncedSearch]);</code></pre>
+
+<h3>20.3 Backend Performance</h3>
+<table>
+  <tr><th>Technique</th><th>Current State</th><th>Improvement</th></tr>
+  <tr><td><strong>Caching</strong></td><td>No caching</td><td>Redis cache for job listings (TTL: 5 min). Cache key: <code>jobs:page:1:limit:20:keyword:react</code></td></tr>
+  <tr><td><strong>Database Indexes</strong></td><td>Only on unique fields</td><td>Add indexes on <code>job.title</code>, <code>job.created_by</code>, <code>application.job+applicant</code></td></tr>
+  <tr><td><strong>Connection Pooling</strong></td><td>Mongoose default (5)</td><td>Increase for production: <code>mongoose.connect(uri, {maxPoolSize: 50})</code></td></tr>
+  <tr><td><strong>Compression</strong></td><td>Not enabled</td><td>Add <code>compression()</code> middleware for gzip responses</td></tr>
+  <tr><td><strong>Rate Limiting</strong></td><td>None</td><td><code>express-rate-limit</code>: 100 requests/15min per IP on auth routes</td></tr>
+</table>
+
+<div class="qa-box">
+  <div class="q">Q: What is the N+1 query problem? Does this project have it?</div>
+  <div class="a"><strong>Answer:</strong> N+1 occurs when you fetch N items, then fire a separate query for each item's related data. Example: <code>getApplicants()</code> fetches a job, then <code>.populate("applications")</code> fires 1 query for all applications. Then <code>.populate({path: "applications", populate: "applicant"})</code> fires N queries (one per applicant). This IS an N+1 problem. Fix: use <code>$lookup</code> aggregation for a single query, or accept the trade-off for small datasets (< 500 applicants).</div>
+</div>
+
+<!-- ==================== CHAPTER 21 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch21">Chapter 21: Testing Strategy</h2>
+
+<div class="warn">⚠️ This project has <strong>zero automated tests</strong>. Interviewers WILL ask about this. Here's how to answer confidently.</div>
+
+<h3>21.1 How to Answer "Where Are Your Tests?"</h3>
+<div class="qa-box">
+  <div class="q">Q: Does this project have unit tests?</div>
+  <div class="a">"No, and I recognize that's a gap. For a production application, I would add: (1) <strong>Unit tests</strong> with Jest for controller logic and utility functions (e.g., <code>formatCleanSkills()</code>, <code>normalizeSkill()</code>, OTP generation). (2) <strong>Integration tests</strong> with Supertest for API endpoints (e.g., register → verify-otp → login flow). (3) <strong>Component tests</strong> with React Testing Library for critical UI flows (login form submission, job application). (4) <strong>E2E tests</strong> with Playwright for full user journeys. Given the project timeline, we prioritized feature delivery, but testing is the first thing I'd add next."</div>
+</div>
+
+<h3>21.2 What Tests Should Exist (If Asked to Write Them)</h3>
+<table>
+  <tr><th>Type</th><th>Tool</th><th>What to Test</th></tr>
+  <tr><td>Unit</td><td>Jest</td><td><code>formatCleanSkills(["react", "reactjs", "React"]) → ["React"]</code></td></tr>
+  <tr><td>Unit</td><td>Jest</td><td><code>normalizeSkill("React.js") → "react js"</code></td></tr>
+  <tr><td>Unit</td><td>Jest</td><td>OTP generation returns 6-digit string</td></tr>
+  <tr><td>Integration</td><td>Jest + Supertest</td><td><code>POST /api/user/register</code> → creates user with <code>isVerified: false</code></td></tr>
+  <tr><td>Integration</td><td>Jest + Supertest</td><td><code>POST /api/application/apply/:id</code> → prevents duplicate application</td></tr>
+  <tr><td>Component</td><td>React Testing Library</td><td>Login form shows error toast on invalid credentials</td></tr>
+  <tr><td>E2E</td><td>Playwright / Cypress</td><td>Full register → OTP → login → apply flow</td></tr>
+</table>
+
+<h3>21.3 Example Unit Test (Interview-Ready Code)</h3>
+<pre><code><span class="cmt">// __tests__/resumeExtractor.test.js</span>
+<span class="kw">import</span> { formatCleanSkills, normalizeSkill } <span class="kw">from</span> <span class="str">"../utils/resumeExtractor"</span>;
+
+describe(<span class="str">"formatCleanSkills"</span>, () => {
+  test(<span class="str">"deduplicates React variations"</span>, () => {
+    <span class="kw">const</span> result = formatCleanSkills([<span class="str">"react"</span>, <span class="str">"reactjs"</span>, <span class="str">"React.js"</span>, <span class="str">"React"</span>]);
+    expect(result).toEqual([<span class="str">"React"</span>]);
+  });
+
+  test(<span class="str">"standardizes skill names"</span>, () => {
+    <span class="kw">const</span> result = formatCleanSkills([<span class="str">"nodejs"</span>, <span class="str">"python"</span>]);
+    expect(result).toEqual([<span class="str">"Node.js"</span>, <span class="str">"Python"</span>]);
+  });
+
+  test(<span class="str">"handles empty and null inputs"</span>, () => {
+    expect(formatCleanSkills([])).toEqual([]);
+    expect(formatCleanSkills([<span class="str">""</span>, <span class="kw">null</span>, <span class="kw">undefined</span>])).toEqual([]);
+  });
+});</code></pre>
+
+<h3>21.4 Example Integration Test</h3>
+<pre><code><span class="cmt">// __tests__/auth.integration.test.js</span>
+<span class="kw">import</span> request <span class="kw">from</span> <span class="str">"supertest"</span>;
+<span class="kw">import</span> app <span class="kw">from</span> <span class="str">"../index.js"</span>;
+
+describe(<span class="str">"POST /api/user/register"</span>, () => {
+  test(<span class="str">"should register a new user"</span>, <span class="kw">async</span> () => {
+    <span class="kw">const</span> res = <span class="kw">await</span> request(app)
+      .post(<span class="str">"/api/user/register"</span>)
+      .send({
+        fullname: <span class="str">"Test User"</span>,
+        email: <span class="str">"test@test.com"</span>,
+        password: <span class="str">"password123"</span>,
+        phoneNumber: <span class="str">"1234567890"</span>,
+        role: <span class="str">"Student"</span>,
+      });
+
+    expect(res.status).toBe(<span class="num">200</span>);
+    expect(res.body.success).toBe(<span class="num">true</span>);
+  });
+
+  test(<span class="str">"should reject duplicate email"</span>, <span class="kw">async</span> () => {
+    <span class="kw">const</span> res = <span class="kw">await</span> request(app)
+      .post(<span class="str">"/api/user/register"</span>)
+      .send({ email: <span class="str">"test@test.com"</span>, <span class="cmt">/* ... same email */</span> });
+
+    expect(res.status).toBe(<span class="num">400</span>);
+    expect(res.body.success).toBe(<span class="num">false</span>);
+  });
+});</code></pre>
+
+<!-- ==================== CHAPTER 22 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch22">Chapter 22: Git & DevOps</h2>
+
+<h3>22.1 Git Questions</h3>
+<div class="qa-box">
+  <div class="q">Q: What is the difference between <code>git merge</code> and <code>git rebase</code>?</div>
+  <div class="a"><strong>Merge:</strong> Creates a merge commit that combines two branches. Preserves full history. <code>git merge feature-branch</code>. <strong>Rebase:</strong> Replays your commits on top of the target branch. Creates a linear history. <code>git rebase main</code>. <strong>When to use:</strong> Merge for shared branches (main, develop). Rebase for local feature branches before merging (clean history). <strong>Golden Rule:</strong> Never rebase commits that have been pushed to a shared branch.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q: What is <code>.gitignore</code>? What's ignored in this project?</div>
+  <div class="a"><code>node_modules/</code> (dependencies — installed from package.json), <code>.env</code> (secrets — API keys, passwords), <code>dist/</code> (build output), <code>.DS_Store</code> (macOS metadata). Without <code>.gitignore</code>, we'd push 400MB+ of <code>node_modules</code> and expose API keys publicly on GitHub.</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q: How do you resolve a merge conflict?</div>
+  <div class="a">(1) Git marks conflicting sections with <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code> and <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>. (2) Open the file, decide which version to keep (or combine both). (3) Remove the conflict markers. (4) <code>git add</code> the resolved file. (5) <code>git commit</code>. For this project, conflicts typically occur in <code>package.json</code> (different dependencies added) or <code>App.jsx</code> (different routes added by team members).</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">Q: What branching strategy would you use?</div>
+  <div class="a"><strong>Git Flow (for this project):</strong> <code>main</code> (production), <code>develop</code> (integration), <code>feature/resume-upload</code> (individual features), <code>hotfix/login-bug</code> (urgent fixes). PR workflow: create feature branch → develop → code review → merge to develop → test → merge to main. Simpler alternative: <strong>Trunk-based development</strong> — short-lived branches merged directly to main with feature flags.</div>
+</div>
+
+<h3>22.2 Docker & Deployment</h3>
+<div class="qa-box">
+  <div class="q">Q: How would you Dockerize this project?</div>
+  <div class="a">Create a <code>Dockerfile</code> for each service + a <code>docker-compose.yml</code>:</div>
+</div>
+<pre><code><span class="cmt"># docker-compose.yml</span>
+version: <span class="str">"3.8"</span>
+services:
+  <span class="fn">mongodb</span>:
+    image: mongo:7
+    ports: [<span class="str">"27017:27017"</span>]
+    volumes: [<span class="str">"mongo-data:/data/db"</span>]
+
+  <span class="fn">backend</span>:
+    build: ./Backend
+    ports: [<span class="str">"5011:5011"</span>]
+    env_file: ./Backend/.env
+    depends_on: [mongodb]
+
+  <span class="fn">frontend</span>:
+    build: ./Frontend
+    ports: [<span class="str">"5173:5173"</span>]
+
+  <span class="fn">ai-service</span>:
+    build: ./ai-service
+    ports: [<span class="str">"8000:8000"</span>]
+    env_file: ./ai-service/.env
+
+volumes:
+  mongo-data:</code></pre>
+
+<h3>22.3 CI/CD Pipeline</h3>
+<div class="qa-box">
+  <div class="q">Q: Describe a CI/CD pipeline for this project.</div>
+  <div class="a"><strong>CI (Continuous Integration):</strong> On every PR: (1) Lint code (ESLint). (2) Run unit tests (Jest). (3) Run integration tests. (4) Build frontend (<code>npm run build</code>). (5) Build Docker images. <strong>CD (Continuous Deployment):</strong> On merge to main: (1) Push Docker images to registry. (2) Deploy to staging (run E2E tests). (3) Deploy to production (with health checks). Tool: GitHub Actions or GitLab CI.</div>
+</div>
+
+<!-- ==================== CHAPTER 23 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch23">Chapter 23: Project Weaknesses — Gotcha Questions</h2>
+
+<div class="warn">⚠️ Interviewers <strong>love</strong> asking about weaknesses to test your self-awareness and engineering maturity. Here's how to answer every gotcha.</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "Your job search uses $regex. That's terrible for performance!"</div>
+  <div class="a">"You're right. <code>$regex</code> with a leading wildcard can't use indexes and triggers a full collection scan. For our dev-scale dataset (< 1000 jobs), this is acceptable. For production, I'd switch to <strong>MongoDB Atlas Search</strong> which provides full-text search with fuzzy matching, relevance scoring, and auto-complete — all using Apache Lucene under the hood. Alternatively, Elasticsearch. The migration is straightforward: create a search index on <code>title</code> and <code>description</code>, replace the <code>find({$regex})</code> with an aggregation <code>$search</code> stage."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "You have no pagination. Loading all jobs at once will crash with 100K records."</div>
+  <div class="a">"Correct. The fix is cursor-based pagination:
+  <code>Job.find(filter).sort({createdAt: -1}).skip((page-1)*limit).limit(limit)</code>
+  and return <code>{jobs, totalCount, page, totalPages}</code>. Frontend adds 'Load More' button or infinite scroll. Skip-based pagination has its own issues at scale (skip is O(n)) — for very large datasets, I'd use cursor-based pagination: <code>{_id: {$lt: lastId}}</code> which uses the index."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "There are no tests. How do you know this works?"</div>
+  <div class="a">"We verified functionality through manual testing during development and peer code reviews. I acknowledge automated tests are essential for a production system. If I were to add them now, I'd prioritize: (1) Unit tests for utility functions like <code>formatCleanSkills()</code> and <code>computeAccurateMatch()</code> — they're pure functions, easiest to test. (2) Integration tests for the auth flow — register, OTP, login is the most critical path. (3) Component tests for forms — ensure validation works correctly. This would give 80% coverage on the most critical paths with minimal effort."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "What happens if someone sends 10,000 login requests per second?"</div>
+  <div class="a">"Currently, nothing prevents it — there's no rate limiting. A brute-force attack could guess passwords or exhaust bcrypt's CPU. The fix is <code>express-rate-limit</code>:
+  <code>rateLimit({windowMs: 15*60*1000, max: 5, message: 'Too many attempts'})</code>
+  Applied to <code>/login</code>, <code>/register</code>, <code>/verify-otp</code>. For distributed rate limiting (multiple server instances), use Redis-backed rate limiting. Additionally, add exponential backoff: after 3 failed attempts, lock the account for 5 minutes."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "Is there any input sanitization? What about NoSQL injection?"</div>
+  <div class="a">"Mongoose provides basic protection — it casts inputs to the schema types, rejecting unexpected types. But raw user input in <code>$regex</code> is dangerous: a user could input <code>.*</code> to match everything or crafted regex for ReDoS (Regular Expression Denial of Service). The fix: (1) Escape regex special characters with <code>input.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')</code>. (2) Use <code>mongo-sanitize</code> middleware to strip <code>$</code> operators from user input. (3) Validate and whitelist input formats with <code>joi</code> or <code>express-validator</code>."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "What if two users apply to the same job at the exact same time?"</div>
+  <div class="a">"This is a race condition. The current duplicate check (<code>Application.findOne({job, applicant})</code>) is not atomic. Between the check and the <code>Application.create()</code>, another request could slip in. Fix: (1) Create a <strong>compound unique index</strong>: <code>Application.createIndex({job: 1, applicant: 1}, {unique: true})</code>. MongoDB will reject the duplicate at the database level, regardless of race conditions. (2) Wrap in a transaction. The unique index is the simpler and more reliable solution."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "JWT can't be revoked before expiry. What if a user's token is stolen?"</div>
+  <div class="a">"True. Mitigation strategies: (1) Short expiry (currently 1 day — could reduce to 1 hour). (2) <strong>Refresh token rotation:</strong> short-lived access token (15 min) + long-lived refresh token (7 days) in separate httpOnly cookies. (3) <strong>Token blacklist:</strong> store revoked token IDs in Redis with TTL matching the token's remaining lifetime. On logout, add token to blacklist. (4) <strong>Token versioning:</strong> store a version counter on the user document. If the version in the token doesn't match, reject it. Increment on password change."</div>
+</div>
+
+<div class="qa-box">
+  <div class="q">GOTCHA: "Your AI service has a 60-second timeout. Users will see a spinning page."</div>
+  <div class="a">"Agreed. The UX for long AI operations should be asynchronous. Instead of blocking: (1) Frontend sends request. (2) Backend creates a 'pending' task in MongoDB, returns <code>taskId</code> immediately. (3) Background worker (Bull queue) processes the AI call. (4) Frontend polls <code>GET /api/ai/task/:taskId</code> every 3 seconds (or uses WebSocket). (5) When complete, frontend shows results. This is the <strong>async request-reply pattern</strong>."</div>
+</div>
+
+<!-- ==================== CHAPTER 24 ==================== -->
+<div class="page-break"></div>
+<h2 id="ch24">Chapter 24: Web Fundamentals & Networking</h2>
+
+<h3>24.1 HTTP Protocol</h3>
+<div class="qa-box">
+  <div class="q">Q: What happens when you type <code>http://localhost:5173</code> and press Enter?</div>
+  <div class="a">(1) Browser resolves <code>localhost</code> → <code>127.0.0.1</code> (loopback). (2) TCP 3-way handshake with port 5173. (3) Browser sends <code>GET / HTTP/1.1</code> request. (4) Vite dev server responds with <code>index.html</code>. (5) Browser parses HTML, discovers <code>&lt;script src="/src/main.jsx"&gt;</code>. (6) Browser requests <code>main.jsx</code>. Vite transforms JSX → JS on-the-fly via esbuild. (7) React mounts, renders components. (8) Components call <code>axios.get("http://localhost:5011/api/job/get")</code>. (9) Browser sends preflight <code>OPTIONS</code> request (CORS). (10) Backend responds with CORS headers. (11) Browser sends actual <code>GET</code> with cookies. (12) Backend responds with JSON. (13) React updates state → re-renders UI.</div>
+</div>
+
+<h3>24.2 HTTP Methods Deep Dive</h3>
+<table>
+  <tr><th>Method</th><th>Idempotent?</th><th>Body?</th><th>Usage in This Project</th></tr>
+  <tr><td><span class="badge badge-blue">GET</span></td><td>✅ Yes</td><td>❌ No</td><td>Fetch jobs, users, analysis. Safe — doesn't modify data.</td></tr>
+  <tr><td><span class="badge badge-green">POST</span></td><td>❌ No</td><td>✅ Yes</td><td>Create resources (register, apply, post job). Each call creates new data.</td></tr>
+  <tr><td><span class="badge badge-orange">PUT</span></td><td>✅ Yes</td><td>✅ Yes</td><td>Update job details. Same request twice = same result.</td></tr>
+  <tr><td><span class="badge badge-red">DELETE</span></td><td>✅ Yes</td><td>❌ No</td><td>Clear chat history. Deleting twice = same result (resource gone).</td></tr>
+</table>
+
+<div class="qa-box">
+  <div class="q">Q: What does "idempotent" mean?</div>
+  <div class="a">Making the same request multiple times produces the same result. <code>GET /api/job/get</code> returns the same data each time. <code>PUT /api/job/update/123 {title: "Dev"}</code> sets the title to "Dev" each time — no matter how many times you call it. <code>POST /api/application/apply/123</code> is NOT idempotent — it would create multiple applications (that's why we have a duplicate check).</div>
+</div>
+
+<h3>24.3 Cookies vs localStorage vs sessionStorage</h3>
+<table>
+  <tr><th>Feature</th><th>Cookies</th><th>localStorage</th><th>sessionStorage</th></tr>
+  <tr><td>Size</td><td>4KB</td><td>5-10MB</td><td>5-10MB</td></tr>
+  <tr><td>Sent to server?</td><td>✅ Auto with every request</td><td>❌ No</td><td>❌ No</td></tr>
+  <tr><td>Expiry</td><td>Set by server (maxAge)</td><td>Never (manual clear)</td><td>Tab close</td></tr>
+  <tr><td>JS accessible?</td><td>❌ if httpOnly</td><td>✅ Yes</td><td>✅ Yes</td></tr>
+  <tr><td>This project uses for</td><td>JWT token (httpOnly)</td><td>Redux persist (user data, saved jobs)</td><td>Not used</td></tr>
+</table>
+
+<h3>24.4 REST vs GraphQL</h3>
+<div class="qa-box">
+  <div class="q">Q: This project uses REST. When would you use GraphQL instead?</div>
+  <div class="a"><strong>REST (this project):</strong> One endpoint per resource. Simple, cacheable, well-understood. Good when: data shape is predictable, CRUD operations, team is familiar with REST. <strong>GraphQL:</strong> One endpoint, client specifies exact fields. Good when: frontend needs different data shapes for mobile vs web, deeply nested data, reducing over-fetching. Example: the Applicants page fetches a job, then applicants, then each applicant's resume analysis. In GraphQL, this would be ONE query. In REST, it's multiple <code>.populate()</code> calls or N+1 queries.</div>
+</div>
+
+<h3>24.5 WebSockets vs HTTP</h3>
+<div class="qa-box">
+  <div class="q">Q: When would you add WebSockets to this project?</div>
+  <div class="a"><strong>HTTP:</strong> Request-response. Client asks, server answers. No persistent connection. This project uses HTTP for everything. <strong>WebSockets:</strong> Full-duplex, persistent connection. Server can push data to client. Use for: (1) Real-time notifications (recruiter accepts → student sees instantly). (2) Live chat with AI assistant (stream responses token by token). (3) Applicant status changes. Implementation: <code>Socket.io</code> on backend, <code>socket.io-client</code> on frontend. Server emits <code>io.to(userId).emit("statusUpdate", data)</code>.</div>
+</div>
+
+<h3>24.6 OAuth 2.0 Flow</h3>
+<div class="qa-box">
+  <div class="q">Q: The project's email system uses OAuth2 as a fallback. Explain OAuth2.</div>
+  <div class="a"><strong>OAuth 2.0</strong> lets an app access a user's data on another service without knowing their password. In this project's mailer: (1) Developer creates OAuth2 credentials in Google Cloud Console. (2) Gets a <code>refresh_token</code> through one-time consent flow. (3) On each email send, Nodemailer uses <code>client_id</code> + <code>client_secret</code> + <code>refresh_token</code> to get a short-lived <code>access_token</code> from Google. (4) Uses that <code>access_token</code> to send email via Gmail API. More secure than App Passwords because tokens can be scoped and revoked.</div>
+</div>
+
+<h3>24.7 HTTPS & SSL/TLS</h3>
+<div class="qa-box">
+  <div class="q">Q: This runs on HTTP in development. What changes for production?</div>
+  <div class="a"><strong>HTTPS is mandatory</strong> in production for: (1) Encrypting JWT cookies in transit (prevents network sniffing). (2) Browser requirement for <code>sameSite: "None"</code> cookies if frontend and backend are on different domains. (3) User trust and SEO. Setup: Deploy behind a reverse proxy (Nginx or cloud load balancer) that terminates SSL. Use Let's Encrypt for free certificates. The Node.js app itself doesn't need to change — the proxy handles HTTPS.</div>
+</div>
+
+<!-- ==================== UPDATED QUICK REFERENCE ==================== -->
+<div class="page-break"></div>
+<h2>Quick Reference — File Index</h2>
+
+<h3>Backend (13 files)</h3>
+<table>
+  <tr><th>File</th><th>Lines</th><th>Purpose</th></tr>
+  <tr><td>index.js</td><td>60</td><td>Express entry point, middleware setup, route mounting</td></tr>
+  <tr><td>controllers/user.controller.js</td><td>456</td><td>Register, login, OTP, profile update</td></tr>
+  <tr><td>controllers/job.controller.js</td><td>280</td><td>CRUD jobs, search, AI recommendations</td></tr>
+  <tr><td>controllers/company.controller.js</td><td>123</td><td>CRUD companies, logo upload</td></tr>
+  <tr><td>controllers/application.controller.js</td><td>140</td><td>Apply, view applicants, accept/reject</td></tr>
+  <tr><td>controllers/ai.controller.js</td><td>1203</td><td>All 5 AI features (largest file)</td></tr>
+  <tr><td>middleware/isAuthenticated.js</td><td>22</td><td>JWT verification</td></tr>
+  <tr><td>middleware/optionalAuth.js</td><td>25</td><td>Non-blocking JWT check</td></tr>
+  <tr><td>middleware/multer.js</td><td>5</td><td>File upload config</td></tr>
+  <tr><td>utils/db.js</td><td>15</td><td>MongoDB connection</td></tr>
+  <tr><td>utils/cloud.js</td><td>13</td><td>Cloudinary config</td></tr>
+  <tr><td>utils/mailer.js</td><td>70</td><td>OTP email sending</td></tr>
+  <tr><td>utils/resumeExtractor.js</td><td>361</td><td>PDF parsing, skill extraction</td></tr>
+</table>
+
+<h3>Frontend Key Files</h3>
+<table>
+  <tr><th>File</th><th>Purpose</th></tr>
+  <tr><td>main.jsx</td><td>App bootstrap with Redux Provider + PersistGate</td></tr>
+  <tr><td>App.jsx</td><td>All routes defined with createBrowserRouter</td></tr>
+  <tr><td>redux/store.js</td><td>Redux store with persist + RESET_STORE</td></tr>
+  <tr><td>redux/authSlice.js</td><td>user + loading state</td></tr>
+  <tr><td>redux/jobSlice.js</td><td>Jobs, saved jobs, search state</td></tr>
+  <tr><td>utils/data.js</td><td>API endpoint constants</td></tr>
+  <tr><td>hooks/useGetAllJobs.jsx</td><td>Custom hook for job fetching</td></tr>
+</table>
+
+<h3>Coverage Scorecard — What This Guide Covers</h3>
+<table>
+  <tr><th>Interview Area</th><th>Questions</th><th>Coverage</th></tr>
+  <tr><td>Project Explanation</td><td>Architecture, features, flows</td><td><span class="badge badge-green">100%</span></td></tr>
+  <tr><td>JavaScript / Node.js</td><td>Event loop, async, modules, streams</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>React / Frontend</td><td>Hooks, memo, context, lazy, error boundaries</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>MongoDB / Database</td><td>Schema design, indexing, aggregation, transactions</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>Authentication & Security</td><td>JWT, bcrypt, XSS, CSRF, OAuth2</td><td><span class="badge badge-green">100%</span></td></tr>
+  <tr><td>API Design</td><td>REST, HTTP methods, status codes, idempotency</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>AI / ML</td><td>RAG, embeddings, semantic search, fallback</td><td><span class="badge badge-green">90%</span></td></tr>
+  <tr><td>System Design</td><td>Scaling, caching, queues, microservices</td><td><span class="badge badge-green">90%</span></td></tr>
+  <tr><td>Performance</td><td>Debouncing, pagination, N+1, caching</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>Testing</td><td>Strategy, tools, example test code</td><td><span class="badge badge-green">90%</span></td></tr>
+  <tr><td>Git & DevOps</td><td>Branching, Docker, CI/CD</td><td><span class="badge badge-green">90%</span></td></tr>
+  <tr><td>Weakness Defense</td><td>8 gotcha questions with perfect answers</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>Web Fundamentals</td><td>HTTP, cookies, REST vs GraphQL, WebSockets</td><td><span class="badge badge-green">95%</span></td></tr>
+  <tr><td>HR / Behavioral</td><td>7 scripted answers</td><td><span class="badge badge-green">90%</span></td></tr>
+  <tr><td colspan="2" style="text-align:right; font-weight:800;">Overall Estimated Coverage</td><td><span class="badge badge-green" style="font-size:11pt;">93%</span></td></tr>
+</table>
+
+<div style="text-align:center; margin-top:50px; padding:30px; background:linear-gradient(135deg, #f3e8ff, #dbeafe); border-radius:12px;">
+  <div style="font-size:18pt; font-weight:900; color:var(--primary); margin-bottom:10px;">🏆 You're Ready for Any Interview!</div>
+  <p style="color:var(--text); font-size:11pt; font-weight:500;">24 chapters • 80+ interview questions • Every gotcha covered</p>
+  <p style="color:var(--muted); font-size:10pt; margin-top:15px;">The remaining ~7% is DSA/coding rounds which are not project-specific.<br>For those, practice on LeetCode (Arrays, Strings, Trees, Graphs).</p>
+  <div style="margin-top:15px; padding:10px; background:white; border-radius:8px;">
+    <p style="color:var(--muted); font-size:9pt; margin:0;">To save as PDF: Open in Chrome → <strong>Ctrl+P</strong> → Destination: <strong>Save as PDF</strong> → Save</p>
+  </div>
+</div>
+
+</body>
+</html>

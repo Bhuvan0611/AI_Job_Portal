@@ -78,9 +78,19 @@ typings/
 Frontend/.env
 Backend/.env
 Backend/*.env
+ai-service/.env
+ai-service/*.env
 # ...but DO commit the example template (placeholders only, no real keys)
 !example.env
 !Backend/example.env
+!ai-service/example.env
+
+# Python cache & virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
